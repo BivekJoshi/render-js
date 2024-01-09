@@ -1,0 +1,14 @@
+@media (max-width: 750px) {
+    .img1 {
+      height:82% !important;
+      width:30% !important
+    }
+  }
+
+@media (max-width: 320px) {
+    .image {
+      height:55px ;
+      width:239px
+    }
+  }
+  

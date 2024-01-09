@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Lavishly Yours';
+    src: url(../../../public/LavishlyYours-Regular.ttf)
+  }
+  
+  /* body {
+    font-family: 'Lavishly Yours', sans-serif;
+  } */
+  
+  @media (max-width: 750px) {
+    .main {
+       margin:0px .2rem !important;
+    }
+  }
+
+  

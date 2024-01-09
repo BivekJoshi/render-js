@@ -1,0 +1,14 @@
+/* @media (max-width: 750px) {
+    .img1 {
+      height:82% !important;
+      width:120px
+    }
+  } */
+
+  @media (max-width: 320px) {
+    .img1 {
+      height:70% !important;
+      width:120px !important
+    }
+  }
+  

@@ -1,0 +1,21 @@
+@media (max-width: 320px) {
+    .box {
+      height:6rem ;
+      width:13rem ;
+    }
+    .img {
+      height:30px !important;
+      width:30px !important;
+    }
+  }
+
+  @media (max-width: 300px) {
+    .box {
+      height:6rem !important;
+      width:13rem !important;
+    }
+    .img {
+      height:60px !important;
+      width:60px !important;
+    }
+  }

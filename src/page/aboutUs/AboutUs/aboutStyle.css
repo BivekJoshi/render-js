@@ -1,0 +1,12 @@
+@media (max-width: 320px) {
+    .imageGoal {
+      height:10rem !important ;
+      width:12rem !important
+    }
+  }
+  @media (max-width: 300px) {
+    .imageGoal {
+      height:60% !important ;
+      width:65% !important
+    }
+  }
