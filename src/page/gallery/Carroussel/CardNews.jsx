@@ -1,10 +1,19 @@
 import React from "react";
-import { Box, Card, CardContent, CardMedia, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Image from "../../../assets/AboutUs1.png";
-import './cardStyle.css'
+import "./cardStyle.css";
 
-const CardNews = ({studentName,quotes}) => {
+const CardNews = ({ studentName, quotes }) => {
   const theme = useTheme();
+  const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
   return (
     <Card>
@@ -19,11 +28,11 @@ const CardNews = ({studentName,quotes}) => {
             height: "6rem",
           },
           [theme.breakpoints.up("md")]: {
-            width: "20rem", 
+            width: "20rem",
             height: "10rem",
           },
           [theme.breakpoints.up("lg")]: {
-            width: "20rem", 
+            width: "20rem",
             height: "10rem",
           },
         }}
@@ -33,11 +42,25 @@ const CardNews = ({studentName,quotes}) => {
             padding: ".5rem",
             display: "flex",
             flexWrap: "wrap",
+            minHeight: "6rem",
+            minWidth: "13rem",
           }}
         >
-          <Typography variant="h6" sx={{ color: "#fff", textAlign: "center" }}>
-            {quotes}
-          </Typography>
+          {!isXsScreen ? (
+            <Typography
+              variant="h6"
+              sx={{ color: "#fff", textAlign: "center" }}
+            >
+              {quotes}
+            </Typography>
+          ) : (
+            <Typography
+              variant="h7"
+              sx={{ color: "#fff", textAlign: "center" }}
+            >
+              {quotes}
+            </Typography>
+          )}
         </div>
         <div
           style={{
@@ -52,11 +75,11 @@ const CardNews = ({studentName,quotes}) => {
               height: "6px",
             },
             [theme.breakpoints.up("md")]: {
-              width: "90px", 
+              width: "90px",
               height: "90px",
             },
             [theme.breakpoints.up("lg")]: {
-              width: "90px", 
+              width: "90px",
               height: "90px",
             },
           }}
@@ -71,11 +94,28 @@ const CardNews = ({studentName,quotes}) => {
       </Box>
 
       <CardContent>
-        <Typography variant="h4" sx={{ fontWeight: "550" }}>
-        {studentName}
-        </Typography>
-        <Typography variant="h6">MIT University</Typography>
-        <Typography variant="p">700$ Scholarship</Typography>
+        {!isXsScreen ? (
+          <Typography variant="h4" sx={{ fontWeight: "550" }}>
+            {studentName}
+          </Typography>
+        ) : (
+          <Typography variant="h6" sx={{ fontWeight: "550" }}>
+            {studentName}
+          </Typography>
+        )}
+        {!isXsScreen ? (
+          <Typography variant="h6">
+            MIT University
+            <br />
+            700$ Scholarship
+          </Typography>
+        ) : (
+          <Typography variant="h7">
+            MIT University
+            <br />
+            700$ Scholarship
+          </Typography>
+        )}
       </CardContent>
     </Card>
   );

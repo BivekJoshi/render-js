@@ -57,7 +57,12 @@ const Gallery = () => {
       <br />
       <Typography
         variant="h1"
-        sx={{ fontFamily: "Lavishly Yours", color: "#199BEA",display:'flex',justifyContent:'center' }}
+        sx={{
+          fontFamily: "Lavishly Yours",
+          color: "#199BEA",
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
         Stories From our Students
       </Typography>
