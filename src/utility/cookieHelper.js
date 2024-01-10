@@ -12,4 +12,9 @@ export const removeUser = () => {
   localStorage.removeItem(STORAGE_KEY);
   localStorage.clear();
 };
+
+export const getStoredFullName = () => {
+  return localStorage.getItem("fullName");
+};
+
 // window.addEventListener("beforeunload", removeUser);

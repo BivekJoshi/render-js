@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
 
-const ProfileButton = () => {
+const ProfileButton = ({userType}) => {
   return (
     <div>
       <Button
@@ -42,11 +42,11 @@ const ProfileButton = () => {
         <Typography
           pt="2px"
           textTransform="capitalize"
-          variant="h6"
-          fontWeight="400"
+          variant="h7"
+          fontWeight="200"
           color="voilet"
         >
-          Admin
+          {userType}
         </Typography>
       </Button>
     </div>

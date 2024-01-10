@@ -57,7 +57,7 @@ const StudentCard = ({name, mobileNumber, email, userType, imageUrl }) => {
               cursor: "pointer",
             }}
             onClick={() => {
-              navigate(`/profile`);
+              navigate(`/studentProfile`);
               // handleClose();
             }}
           >

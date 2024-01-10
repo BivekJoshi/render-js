@@ -39,7 +39,7 @@ export const useLogin = ({ onSuccess }) => {
         if (data?.userType === "SUPER_ADMIN") {
           navigate("/adminProfile");
         } else {
-          navigate("/profile");
+          navigate("/studentProfile");
         }
       },
       onError: (err, _variables, _context) => {

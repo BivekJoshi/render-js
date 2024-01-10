@@ -9,7 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Avatar, Box, Container, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/RenderLogoFull.png";
-import { getUser, removeUser } from "../../utility/cookieHelper";
+import { getStoredFullName, getUser, removeUser } from "../../utility/cookieHelper";
 
 const navItem = [
   {
@@ -55,6 +55,7 @@ function Navbar() {
   const open = Boolean(anchorEl);
   const [activePage, setActivePage] = React.useState("/home");
   const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const [storedFullName, setStoredFullName] = React.useState("");
 
   const navigate = useNavigate();
   const data = getUser();
@@ -90,6 +91,13 @@ function Navbar() {
     navigate(`/`)
     handleCloseProfile();
   }
+
+  React.useEffect(() => {
+    if (getStoredFullName) {
+      setStoredFullName(getStoredFullName);
+    }
+  }, []);
+
   return (
     <Box sx={{ padding: ".5rem", background: "#E6E6E6" }}>
       <Container maxWidth="xl">
@@ -220,7 +228,7 @@ function Navbar() {
                       alt="Remy Sharp"
                       src="/static/images/avatar/1.jpg"
                     />
-                    <b style={{color:'#1A75BD'}}>{isXsScreen ? "" : "Bivek Joshi"}</b>
+                    <b style={{color:'#1A75BD'}}>{isXsScreen ? "" : storedFullName}</b>
                   </Typography>
                 </div>
                 <Menu

@@ -17,6 +17,7 @@ import AuthRegistation from "../page/auth/AuthRegistation";
 import ForgetPassword from "../page/auth/ForgetPassword";
 import ResetPassword from "../page/auth/ResetPassword";
 import Team from "../page/team/Team";
+import StudentProfile from "../page/profile/StudentProfile.jsx/StudentProfile";
 
 const AppRoutes = () => {
   return (
@@ -32,7 +33,7 @@ const AppRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/aboutus" element={<AboutFinal />} />
           <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/studentProfile" element={<StudentProfile />} />
           <Route path="/countries" element={<Countries />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/gallery" element={<Gallery />} />
