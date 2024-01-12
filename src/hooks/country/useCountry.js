@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addCountry,
+  editCountry,
   getCountry,
   getCountryCode,
 } from "../../api/country/country-api";
@@ -32,7 +33,28 @@ export const useAddCountry = ({ onSuccess, selectedProfile }) => {
     {
       onSuccess: (data, variables, context) => {
         onSuccess && onSuccess(data, variables, context);
-        toast.success("Profile Picture Successfully Changed");
+        toast.success("Added Country Successfully");
+        queryClient.invalidateQueries('useGetCountry');
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(err);
+      },
+    }
+  );
+};
+
+/*________________________EDIT COUNTRY_____________________________________*/
+export const useEditCountry = ({ onSuccess, selectedProfile }) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ["editCountry"],
+    (formData) => {
+      return editCountry(formData, selectedProfile);
+    },
+    {
+      onSuccess: (data, variables, context) => {
+        onSuccess && onSuccess(data, variables, context);
+        toast.success("Successfully edited country");
         queryClient.invalidateQueries('useGetCountry');
       },
       onError: (err, _variables, _context) => {

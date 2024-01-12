@@ -2,6 +2,10 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Button, Tab } from "@mui/material";
 import React, { useState } from "react";
 import Team from "../Team";
+import StaffForm from "../../Form/Staff/StaffForm";
+import FormModal from "../../../components/modal/FormModal";
+import TeamTableView from "./TeamTableView";
+import { useGetStaff } from "../../../hooks/staff/useStaff";
 
 const labelStyle = {
   backgroundColor: "#EBEDEF",
@@ -20,10 +24,11 @@ const activeLabelStyle = {
 
 const AdminTeam = () => {
   const [value, setValue] = useState("1");
-  const [openStudentModal, setOpenStudentModal] = useState(false);
+  const [openStaffModal, setOpenStaffModal] = useState(false);
+  const { data: staffData, isLoading } = useGetStaff();
 
   const handleButtonClick = () => {
-    setOpenStudentModal(true);
+    setOpenStaffModal(true);
   };
 
   const handleChange = (event, newValue) => {
@@ -67,22 +72,20 @@ const AdminTeam = () => {
           </Box>
         </Box>
         <TabPanel value="1">
-          <Team/>
+          <Team />
         </TabPanel>
         <TabPanel value="2">
-          <div>osanoxaskx</div>
+          <TeamTableView staffData={staffData}/>
         </TabPanel>
       </Box>
-      {/* {openStudentModal && (
+      {openStaffModal && (
         <FormModal
-          title="Add Student Detail"
-          open={openStudentModal}
-          onClose={() => setOpenStudentModal(false)}
-          formComponent={
-            <StudentAddForm onClose={() => setOpenStudentModal(false)} />
-          }
+          title="Add Team Detail"
+          open={openStaffModal}
+          onClose={() => setOpenStaffModal(false)}
+          formComponent={<StaffForm onClose={() => setOpenStaffModal(false)} />}
         />
-      )} */}
+      )}
     </TabContext>
   );
 };

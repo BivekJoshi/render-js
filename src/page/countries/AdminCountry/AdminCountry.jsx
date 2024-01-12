@@ -8,11 +8,21 @@ import FormModal from "../../../components/modal/FormModal";
 const AdminCountry = () => {
   const { data, isLoading } = useGetCountry();
   const [openCountry, setOpenCountry] = useState(false);
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [rowData, setRowData] = useState();
 
   const handleButtonClick = () => {
     setOpenCountry(true);
   };
 
+  const handleModalEditClose = () => {
+    setIsModalEditOpen(false);
+  };
+
+  const editRow = (row) => {
+    setIsModalEditOpen(true);
+    setRowData(row?.original);
+  };
   const columns = useMemo(
     () => [
       {
@@ -86,6 +96,10 @@ const AdminCountry = () => {
         // handleNotification={notificationRoute}
         // delete
         // notification
+        enableEditing={true}
+        enableEdit
+        edit
+        handleEdit={editRow}
       />
 
       {openCountry && (
@@ -96,6 +110,15 @@ const AdminCountry = () => {
           formComponent={<CountryForm onClose={() => setOpenCountry(false)} />}
         />
       )}
+      <FormModal
+        open={isModalEditOpen}
+        onClose={handleModalEditClose}
+        formComponent={
+          <>
+            <CountryForm onClose={() => setOpenCountry(false)} data={rowData}/>
+          </>
+        }
+      />
     </>
   );
 };

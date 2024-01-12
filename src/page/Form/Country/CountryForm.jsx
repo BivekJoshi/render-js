@@ -6,11 +6,12 @@ import BlankImage from "../../../assets/BlankImage.jpg";
 import RemarkField from "../../../components/form/RemarkField";
 import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 
-const CountryForm = ({ userInfoData }) => {
-  const [selectedProfile, setSelectedProfile] = useState();
+const CountryForm = ({ userInfoData ,data}) => {
+
+  const [selectedProfile, setSelectedProfile] = useState({});
   const [imagePreview, setImagePreview] = useState(null);
   const { formik } = useCountryForm({
-    selectedProfile,
+    selectedProfile,data
   });
 
   const handleChangeImage = (e) => {
@@ -114,7 +115,7 @@ const CountryForm = ({ userInfoData }) => {
               formik.touched.countryName && Boolean(formik.errors.countryName)
             }
             helperText={formik.touched.countryName && formik.errors.countryName}
-            InputLabelProps={{ shrink: Boolen(formik.values.countryName) }}
+            // InputLabelProps={{ shrink: Boolen(formik.values.countryName) }}
             variant="outlined"
             size="small"
           />
@@ -128,7 +129,7 @@ const CountryForm = ({ userInfoData }) => {
               formik.touched.countryCode && Boolean(formik.errors.countryCode)
             }
             helperText={formik.touched.countryCode && formik.errors.countryCode}
-            InputLabelProps={{ shrink: Boolean(formik.values.countryCode) }}
+            // InputLabelProps={{ shrink: Boolean(formik.values.countryCode) }}
             variant="outlined"
             size="small"
           />
@@ -141,9 +142,9 @@ const CountryForm = ({ userInfoData }) => {
             maxLength={255}
             variant="outlined"
             multiline
-            InputLabelProps={{
-              shrink: Boolean(formik.values.countryDescription),
-            }}
+            // InputLabelProps={{
+            //   shrink: Boolean(formik.values.countryDescription),
+            // }}
             rows={4}
             inputProps={{ maxLength: 250 }}
           />

@@ -27,6 +27,6 @@ export const addStaff = async (formData, selectedProfile) => {
 
 
 export const getStaff = async () => {
-  const data = await axiosInstance.get(`v1/notice/find`);
+  const data = await axiosInstance.get(`v1/staff/find`);
   return data?.data;
 };
