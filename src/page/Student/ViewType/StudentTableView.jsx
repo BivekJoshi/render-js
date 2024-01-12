@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import CustomTable from "../../../components/customtable/CustomTable";
+import { Avatar, Typography } from "@mui/material";
 
 const StudentTableView = (studentData) => {
   console.log(studentData?.studentData?.data?.data, "studentData");
@@ -10,8 +11,17 @@ const StudentTableView = (studentData) => {
         id: 1,
         accessorKey: "user.fullName",
         header: "Student",
-        size: 100,
+        size: 250,
         sortable: false,
+        Cell: ({ row }) => (
+          <div style={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
+            <Avatar
+              alt={row?.original?.user?.fullName}
+              src={row?.original?.user?.imageUrl}
+            />
+            <Typography variant="h6">{row.original.user.fullName}</Typography>
+          </div>
+        ),
       },
       {
         id: 2,

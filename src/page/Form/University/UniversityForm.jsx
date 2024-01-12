@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Autocomplete, Box, Button, Grid, TextField } from "@mui/material";
 import toast from "react-hot-toast";
-import BlankImage from "../../../assets/BlankImage.jpg"
+import BlankImage from "../../../assets/BlankImage.jpg";
 import useUniversityForm from "../../../hooks/university/University/useUniversityForm";
-import { useGetCountry, useGetCountryCode } from "../../../hooks/country/useCountry";
+import {
+  useGetCountry,
+  useGetCountryCode,
+} from "../../../hooks/country/useCountry";
+import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
+import RemarkField from "../../../components/form/RemarkField";
 
 const UniversityForm = ({ userInfoData }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
-  const {data: countryData,isLoading}=useGetCountryCode();
+  const { data: countryData, isLoading } = useGetCountryCode();
 
   const { formik } = useUniversityForm({
     selectedProfile,
@@ -42,13 +47,8 @@ const UniversityForm = ({ userInfoData }) => {
       margin="0"
       justifyContent="center"
       width="100%"
-      padding="1rem"
-      sx={{
-        border: "1px solid #e0e0e0", 
-        borderRadius: "8px",
-      }}
     >
-      <Grid item xs={4}>
+      <Grid item xs={5}>
         <Box>
           {!imagePreview ? (
             userInfoData?.imageFilePath ? (
@@ -61,8 +61,11 @@ const UniversityForm = ({ userInfoData }) => {
               // />
               <div>image</div>
             ) : (
-              <div style={{border:"1px solid rgb(140, 140, 140)"}}>
-              <img src={BlankImage} style={{width:"100%",height:"100%"}}/>
+              <div style={{height:"140px" }}>
+                <img
+                  src={BlankImage}
+                  style={{ width: "100%", height: "100%" }}
+                />
               </div>
             )
           ) : (
@@ -74,8 +77,8 @@ const UniversityForm = ({ userInfoData }) => {
               <img
                 src={imagePreview}
                 alt="Selected Profile"
-                height="200px"
-                width="200px"
+                height="140px"
+                width="180px"
               />
             </div>
           )}
@@ -93,48 +96,32 @@ const UniversityForm = ({ userInfoData }) => {
             )} */}
           {/* {imagePreview && (
               <> */}
-          <div>
-            <label htmlFor="file" className="file-label">
-              <input
-                type="file"
-                id="file"
-                onChange={handleChangeImage}
-                style={{ display: "none" }}
-              />
-              <Button
-                className="chooseInput"
-                sx={{
-                  bgcolor: "#7d449d",
-                  width: "300px",
-                  height: "26px",
-                  color: "black",
-                  "&:hover": { bgcolor: "#7d449d", color: "#fff" },
-                  textTransform: "none",
-                }}
-                component="span"
-              >
-                Add University Logo
-              </Button>
-            </label>
-          </div>
-          {/* </>
-            )} */}
+          <Button
+            component="label"
+            variant="contained"
+            onChange={handleChangeImage}
+            sx={{ textTransform: "none" }}
+            fullWidth
+          >
+            Add University Logo
+            <VisuallyHiddenInput type="file" />
+          </Button>
         </Box>
       </Grid>
 
-      <Grid item xs={8}>
-        <div style={{display:"flex",flexDirection:"column",gap:"1rem"}}>
+      <Grid item xs={7}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <TextField
             id="name"
             name="name"
             label="University Name"
-            placeholder="Enter university name"
             fullWidth
             value={formik.values.name}
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
             variant="outlined"
+            InputLabelProps={{ shrink: Boolean(formik.values.name) }}
             size="small"
           />
           <Autocomplete
@@ -144,7 +131,7 @@ const UniversityForm = ({ userInfoData }) => {
             getOptionLabel={(option) => option?.countryName || ""}
             value={countryData?.find(
               (countrycode) =>
-              countrycode?.countryCode === formik.values.countryCode || ""
+                countrycode?.countryCode === formik.values.countryCode || ""
             )}
             onChange={(event, newValue) => {
               formik.setFieldValue("countryCode", newValue?.countryCode || "");
@@ -154,7 +141,6 @@ const UniversityForm = ({ userInfoData }) => {
                 {...params}
                 variant="outlined"
                 label="Country"
-                placeholder="Select country"
                 fullWidth
                 required
                 error={
@@ -162,10 +148,10 @@ const UniversityForm = ({ userInfoData }) => {
                   Boolean(formik.errors.countryCode)
                 }
                 helperText={
-                  formik.touched.countryCode &&
-                  formik.errors.countryCode
+                  formik.touched.countryCode && formik.errors.countryCode
                 }
-                InputLabelProps={{ shrink: true }}
+                InputLabelProps={{ shrink: Boolean(formik.values.countryCode) }}
+                size="small"
               />
             )}
           />
@@ -173,17 +159,14 @@ const UniversityForm = ({ userInfoData }) => {
             id="url"
             name="url"
             label="Redirecting Url"
-            placeholder="Enter redirecting url if any"
             fullWidth
+            multiline
+            rows={2}
             value={formik.values.url}
             onChange={formik.handleChange}
-            error={
-              formik.touched.url &&
-              Boolean(formik.errors.url)
-            }
-            helperText={
-              formik.touched.url && formik.errors.url
-            }
+            error={formik.touched.url && Boolean(formik.errors.url)}
+            helperText={formik.touched.url && formik.errors.url}
+            InputLabelProps={{ shrink: Boolean(formik.values.url) }}
             variant="outlined"
             size="small"
           />
@@ -200,17 +183,21 @@ const UniversityForm = ({ userInfoData }) => {
             sx={{
               mt: 3,
               ml: 1,
-              color: "#000",
-              backgroundColor: "#E7E0EB",
               textTransform: "none",
-              border: "1px solid #6750A4",
-              "&:hover": {
-                backgroundColor: "#7d449d",
-                color: "#fff",
-              },
             }}
           >
             Upload
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            sx={{
+              mt: 3,
+              ml: 1,
+              textTransform: "none",
+            }}
+          >
+            Close
           </Button>
         </Grid>
       </Grid>

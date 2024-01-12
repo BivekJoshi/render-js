@@ -12,7 +12,7 @@ export const useAddImage = ({ onSuccess, selectedProfile }) => {
     {
       onSuccess: (data, variables, context) => {
         onSuccess && onSuccess(data, variables, context);
-        toast.success("Profile Picture Successfully Changed");
+        toast.success("Notice Added Successfully");
         queryClient.invalidateQueries('getNotice');
       },
       onError: (err, _variables, _context) => {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, TextField, useTheme } from "@mui/material";
 import useNoticeForm from "../../../hooks/notice/Notice/useNoticeForm";
-// import { DOC_URL } from "../../../utility/getBaseUrl";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import toast from "react-hot-toast";
-import BlankImage from "../../../assets/BlankImage.jpg"
+import BlankImage from "../../../assets/BlankImage.jpg";
+import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
+import RemarkField from "../../../components/form/RemarkField";
 
 const NoticeForm = ({ userInfoData }) => {
   const [selectedProfile, setSelectedProfile] = useState();
@@ -35,19 +35,23 @@ const NoticeForm = ({ userInfoData }) => {
   };
 
   return (
-    <Grid
-      container
-      spacing={3}
-      margin="0"
-      justifyContent="center"
-      width="100%"
-      padding="1rem"
-      sx={{
-        border: "1px solid #e0e0e0", 
-        borderRadius: "8px",
-      }}
-    >
-      <Grid item xs={4}>
+    <Grid container spacing={3} margin="0" justifyContent="center" width="100%">
+      <Grid item xs={12}>
+        <TextField
+          id="title"
+          name="title"
+          label="Title"
+          fullWidth
+          value={formik.values.title}
+          onChange={formik.handleChange}
+          error={formik.touched.title && Boolean(formik.errors.title)}
+          helperText={formik.touched.title && formik.errors.title}
+          variant="outlined"
+          size="small"
+          // InputLabelProps={{ shrink: Boolen(formik.values.title) }}
+        />
+      </Grid>
+      <Grid item xs={5}>
         <Box>
           {!imagePreview ? (
             userInfoData?.imageFilePath ? (
@@ -60,8 +64,11 @@ const NoticeForm = ({ userInfoData }) => {
               // />
               <div>image</div>
             ) : (
-              <div style={{border:"1px solid rgb(140, 140, 140)"}}>
-              <img src={BlankImage} style={{width:"100%",height:"100%"}}/>
+              <div style={{ height:"200px"}}>
+                <img
+                  src={BlankImage}
+                  style={{ width: "100%", height: "100%" }}
+                />
               </div>
             )
           ) : (
@@ -74,7 +81,7 @@ const NoticeForm = ({ userInfoData }) => {
                 src={imagePreview}
                 alt="Selected Profile"
                 height="200px"
-                width="200px"
+                width="180px"
               />
             </div>
           )}
@@ -92,72 +99,25 @@ const NoticeForm = ({ userInfoData }) => {
             )} */}
           {/* {imagePreview && (
               <> */}
-          <div>
-            <label htmlFor="file" className="file-label">
-              <input
-                type="file"
-                id="file"
-                onChange={handleChangeImage}
-                style={{ display: "none" }}
-              />
-              <Button
-                className="chooseInput"
-                sx={{
-                  bgcolor: "#7d449d",
-                  width: "300px",
-                  height: "26px",
-                  color: "black",
-                  "&:hover": { bgcolor: "#7d449d", color: "#fff" },
-                  textTransform: "none",
-                }}
-                component="span"
-              >
-                Add Notice Picture
-              </Button>
-            </label>
-          </div>
-          {/* </>
-            )} */}
+          <Button
+            component="label"
+            variant="contained"
+            onChange={handleChangeImage}
+            sx={{ textTransform: "none" }}
+            fullWidth
+          >
+            Add Notice Photo
+            <VisuallyHiddenInput type="file" />
+          </Button>
         </Box>
       </Grid>
 
-      <Grid item xs={8}>
-        <div style={{display:"flex",flexDirection:"column",gap:"1rem"}}>
-          <TextField
-            id="title"
-            name="title"
-            label="Title"
-            placeholder="Enter notice title"
-            fullWidth
-            value={formik.values.title}
-            onChange={formik.handleChange}
-            error={formik.touched.title && Boolean(formik.errors.title)}
-            helperText={formik.touched.title && formik.errors.title}
-            variant="outlined"
-            size="small"
-          />
-          <TextField
-            id="description"
-            name="description"
-            label="Description"
-            placeholder="Enter description fornotice"
-            fullWidth
-            multiline
-            rows={3}
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.description && Boolean(formik.errors.description)
-            }
-            helperText={formik.touched.description && formik.errors.description}
-            variant="outlined"
-            size="small"
-          />
+      <Grid item xs={7}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <TextField
             id="endDateTime"
             name="endDateTime"
             label="Date Time"
-            placeholder="Select date time"
             fullWidth
             type="datetime-local"
             value={formik.values.endDateTime}
@@ -174,7 +134,6 @@ const NoticeForm = ({ userInfoData }) => {
             id="redirectingUrl"
             name="redirectingUrl"
             label="Redirecting Url"
-            placeholder="Enter redirecting url if any"
             fullWidth
             value={formik.values.redirectingUrl}
             onChange={formik.handleChange}
@@ -185,8 +144,24 @@ const NoticeForm = ({ userInfoData }) => {
             helperText={
               formik.touched.redirectingUrl && formik.errors.redirectingUrl
             }
+            // InputLabelProps={{ shrink: Boolen(formik.values.redirectingUrl) }}
             variant="outlined"
             size="small"
+          />
+          <RemarkField
+            id="description"
+            name="description"
+            label="Description"
+            fullWidth
+            formik={formik}
+            maxLength={255}
+            variant="outlined"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.description),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
           />
         </div>
         <Grid
@@ -201,17 +176,21 @@ const NoticeForm = ({ userInfoData }) => {
             sx={{
               mt: 3,
               ml: 1,
-              color: "#000",
-              backgroundColor: "#E7E0EB",
               textTransform: "none",
-              border: "1px solid #6750A4",
-              "&:hover": {
-                backgroundColor: "#7d449d",
-                color: "#fff",
-              },
             }}
           >
             Upload
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            sx={{
+              mt: 3,
+              ml: 1,
+              textTransform: "none",
+            }}
+          >
+            Close
           </Button>
         </Grid>
       </Grid>

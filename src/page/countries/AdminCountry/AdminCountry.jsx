@@ -1,13 +1,17 @@
 import React, { useMemo, useState } from "react";
-import { Button, Grid } from "@mui/material";
+import { Avatar, Button, Grid } from "@mui/material";
 import { useGetCountry } from "../../../hooks/country/useCountry";
 import CustomTable from "../../../components/customtable/CustomTable";
 import CountryForm from "../../Form/Country/CountryForm";
+import FormModal from "../../../components/modal/FormModal";
 
 const AdminCountry = () => {
   const { data, isLoading } = useGetCountry();
-  const [openNotice, setOpenNotice] = useState(false);
-  console.log(data,"dta here");
+  const [openCountry, setOpenCountry] = useState(false);
+
+  const handleButtonClick = () => {
+    setOpenCountry(true);
+  };
 
   const columns = useMemo(
     () => [
@@ -32,26 +36,37 @@ const AdminCountry = () => {
         size: 400,
         sortable: false,
       },
+      {
+        id: 4,
+        accessorKey: "imagePath",
+        header: "Image",
+        Cell: ({ row }) => (
+          <div style={{ width: "12%", height: "12%" }}>
+            <img
+              alt={row.original.countryName}
+              src={row.original.imagePath}
+              style={{ width: "100%", height: "100%" }}
+            />
+          </div>
+        ),
+        sortable: false,
+      },
     ],
     []
   );
 
-  const handleClickButton = () => {
-    setOpenNotice(true);
-  };
   return (
     <>
       <Grid container justifyContent="flex-end" alignItems="center">
         <Button
           variant="contained"
           sx={{ textTransform: "none" }}
-          onClick={handleClickButton}
+          onClick={handleButtonClick}
         >
-          + Add Notice
+          + Add Country
         </Button>
       </Grid>
 
-      {openNotice && <CountryForm/>}
       <br />
       <CustomTable
         title="Country"
@@ -72,6 +87,15 @@ const AdminCountry = () => {
         // delete
         // notification
       />
+
+      {openCountry && (
+        <FormModal
+          title="Add Country Detail"
+          open={openCountry}
+          onClose={() => setOpenCountry(false)}
+          formComponent={<CountryForm onClose={() => setOpenCountry(false)} />}
+        />
+      )}
     </>
   );
 };

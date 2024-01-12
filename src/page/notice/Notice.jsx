@@ -3,10 +3,15 @@ import CustomTable from "../../components/customtable/CustomTable";
 import { useGetNotice } from "../../hooks/notice/useNotice";
 import { Button, Grid } from "@mui/material";
 import NoticeForm from "../Form/Notice/NoticeForm";
+import FormModal from "../../components/modal/FormModal";
 
 const Notice = () => {
   const { data, isLoading } = useGetNotice();
   const [openNotice, setOpenNotice] = useState(false);
+
+  const handleButtonClick = () => {
+    setOpenNotice(true);
+  };
 
   const columns = useMemo(
     () => [
@@ -42,22 +47,17 @@ const Notice = () => {
     []
   );
 
-  const handleClickButton = () => {
-    setOpenNotice(true);
-  };
   return (
     <>
       <Grid container justifyContent="flex-end" alignItems="center">
         <Button
           variant="contained"
           sx={{ textTransform: "none" }}
-          onClick={handleClickButton}
+          onClick={handleButtonClick}
         >
           + Add Notice
         </Button>
       </Grid>
-
-      {openNotice && <NoticeForm />}
       <br />
       <CustomTable
         title="Notice"
@@ -78,6 +78,15 @@ const Notice = () => {
         // delete
         // notification
       />
+
+      {openNotice && (
+        <FormModal
+          title="Add Notice Detail"
+          open={openNotice}
+          onClose={() => setOpenNotice(false)}
+          formComponent={<NoticeForm onClose={() => setOpenNotice(false)} />}
+        />
+      )}
     </>
   );
 };

@@ -37,4 +37,3 @@ export const useNoticeForm = ({ selectedProfile }) => {
   };
 };
 
-export default useNoticeForm;

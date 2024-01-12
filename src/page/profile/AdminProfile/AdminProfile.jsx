@@ -24,6 +24,7 @@ import Material from "../../material/Material";
 import Registation from "../../Registation/Registation";
 import { useGetLoggedInUserDetail } from "../../../hooks/auth/useAuth";
 import ReuseSideProfile from "./ReuseSideProfile";
+import AdminTeam from "../../team/AdminTeamView.jsx/AdminTeam";
 
 const menuItems = [
   { label: "Students", component: <Student /> },
@@ -132,6 +133,17 @@ const AdminProfile = () => {
             }}
           >
             <Registation />
+          </Box>
+        </TabPanel>
+        <TabPanel sx={{ p: 0 }} value="7">
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              borderRadius: ".5rem",
+              padding: "1rem",
+            }}
+          >
+            <AdminTeam />
           </Box>
         </TabPanel>
       </TabContext>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
-// import { DOC_URL } from "../../../utility/getBaseUrl";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import toast from "react-hot-toast";
 import useCountryForm from "../../../hooks/country/Country/useCountryForm";
-import BlankImage from "../../../assets/BlankImage.jpg"
+import BlankImage from "../../../assets/BlankImage.jpg";
+import RemarkField from "../../../components/form/RemarkField";
+import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 
 const CountryForm = ({ userInfoData }) => {
   const [selectedProfile, setSelectedProfile] = useState();
@@ -40,13 +40,8 @@ const CountryForm = ({ userInfoData }) => {
       margin="0"
       justifyContent="center"
       width="100%"
-      padding="1rem"
-      sx={{
-        border: "1px solid #e0e0e0",
-        borderRadius: "8px",
-      }}
     >
-      <Grid item xs={4}>
+      <Grid item xs={5}>
         <Box>
           {!imagePreview ? (
             userInfoData?.imageFilePath ? (
@@ -59,8 +54,11 @@ const CountryForm = ({ userInfoData }) => {
               // />
               <div>image</div>
             ) : (
-              <div style={{border:"1px solid rgb(140, 140, 140)"}}>
-              <img src={BlankImage} style={{width:"100%",height:"100%"}}/>
+              <div style={{ height: "200px" }}>
+                <img
+                  src={BlankImage}
+                  style={{ width: "100%", height: "100%" }}
+                />
               </div>
             )
           ) : (
@@ -73,7 +71,7 @@ const CountryForm = ({ userInfoData }) => {
                 src={imagePreview}
                 alt="Selected Profile"
                 height="200px"
-                width="200px"
+                width="180px"
               />
             </Grid>
           )}
@@ -91,48 +89,32 @@ const CountryForm = ({ userInfoData }) => {
             )} */}
           {/* {imagePreview && (
               <> */}
-          <div>
-            <label htmlFor="file">
-              <input
-                type="file"
-                id="file"
-                onChange={handleChangeImage}
-                style={{ display: "none" }}
-              />
-              <Button
-                className="chooseInput"
-                sx={{
-                  bgcolor: "#7d449d",
-                  width: "300px",
-                  height: "26px",
-                  color: "black",
-                  "&:hover": { bgcolor: "#7d449d", color: "#fff" },
-                  textTransform: "none",
-                }}
-                component="span"
-              >
-                Add Country Image
-              </Button>
-            </label>
-          </div>
-          {/* </>
-            )} */}
+          <Button
+            component="label"
+            variant="contained"
+            onChange={handleChangeImage}
+            sx={{ textTransform: "none" }}
+            fullWidth
+          >
+            Add Country Photo
+            <VisuallyHiddenInput type="file" />
+          </Button>
         </Box>
       </Grid>
 
-      <Grid item xs={8}>
+      <Grid item xs={7}>
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <TextField
             id="countryName"
             name="countryName"
             label="Country Name"
-            placeholder="Enter country name "
             value={formik.values.countryName}
             onChange={formik.handleChange}
             error={
               formik.touched.countryName && Boolean(formik.errors.countryName)
             }
             helperText={formik.touched.countryName && formik.errors.countryName}
+            InputLabelProps={{ shrink: Boolen(formik.values.countryName) }}
             variant="outlined"
             size="small"
           />
@@ -140,36 +122,30 @@ const CountryForm = ({ userInfoData }) => {
             id="countryCode"
             name="countryCode"
             label="Country Code"
-            placeholder="Enter country code"
             value={formik.values.countryCode}
             onChange={formik.handleChange}
             error={
               formik.touched.countryCode && Boolean(formik.errors.countryCode)
             }
             helperText={formik.touched.countryCode && formik.errors.countryCode}
+            InputLabelProps={{ shrink: Boolean(formik.values.countryCode) }}
             variant="outlined"
             size="small"
           />
-
-          <TextField
+          <RemarkField
             id="countryDescription"
             name="countryDescription"
-            label="Description"
-            placeholder="Enter country description"
-            value={formik.values.countryDescription}
-            onChange={formik.handleChange}
-            multiline
-            rows={3}
-            error={
-              formik.touched.countryDescription &&
-              Boolean(formik.errors.countryDescription)
-            }
-            helperText={
-              formik.touched.countryDescription &&
-              formik.errors.countryDescription
-            }
+            label="Country Description"
+            fullWidth
+            formik={formik}
+            maxLength={255}
             variant="outlined"
-            size="small"
+            multiline
+            InputLabelProps={{
+              shrink: Boolean(formik.values.countryDescription),
+            }}
+            rows={4}
+            inputProps={{ maxLength: 250 }}
           />
         </div>
         <Grid
@@ -184,17 +160,21 @@ const CountryForm = ({ userInfoData }) => {
             sx={{
               mt: 3,
               ml: 1,
-              color: "#000",
-              backgroundColor: "#E7E0EB",
               textTransform: "none",
-              border: "1px solid #6750A4",
-              "&:hover": {
-                backgroundColor: "#7d449d",
-                color: "#fff",
-              },
             }}
           >
-            Update
+            Upload
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            sx={{
+              mt: 3,
+              ml: 1,
+              textTransform: "none",
+            }}
+          >
+            Close
           </Button>
         </Grid>
       </Grid>

@@ -3,16 +3,21 @@ import { Button, Grid } from "@mui/material";
 import { useGetUniversity } from "../../hooks/university/useUniversity";
 import CustomTable from "../../components/customtable/CustomTable";
 import UniversityForm from "../Form/University/UniversityForm";
+import FormModal from "../../components/modal/FormModal";
 
 const University = () => {
   const { data, isLoading } = useGetUniversity();
-  const [openNotice, setOpenNotice] = useState(false);
+  const [openUniversity, setOpenUniversity] = useState(false);
+
+  const handleButtonClick = () => {
+    setOpenUniversity(true);
+  };
 
   const columns = useMemo(
     () => [
       {
         id: 1,
-        accessorKey: "countryCode",
+        accessorKey: "country.countryName",
         header: "Country",
         size: 200,
         sortable: false,
@@ -35,22 +40,17 @@ const University = () => {
     []
   );
 
-  const handleClickButton = () => {
-    setOpenNotice(true);
-  };
   return (
     <>
       <Grid container justifyContent="flex-end" alignItems="center">
         <Button
           variant="contained"
           sx={{ textTransform: "none" }}
-          onClick={handleClickButton}
+          onClick={handleButtonClick}
         >
           + Add University
         </Button>
       </Grid>
-
-      {openNotice && <UniversityForm />}
       <br />
       <CustomTable
         title="University"
@@ -71,6 +71,16 @@ const University = () => {
         // delete
         // notification
       />
+      {openUniversity && (
+        <FormModal
+          title="Add University Detail"
+          open={openUniversity}
+          onClose={() => setOpenUniversity(false)}
+          formComponent={
+            <UniversityForm onClose={() => setOpenUniversity(false)} />
+          }
+        />
+      )}
     </>
   );
 };
