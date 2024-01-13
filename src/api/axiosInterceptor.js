@@ -1,13 +1,15 @@
 import Axios from "axios";
-import { getBaseUrl } from "../utility/getBaseUrl";
+import { getBaseUrl, getDocUrl } from "../utility/getBaseUrl";
 import { getUser, removeUser } from "../utility/cookieHelper";
 import { jwtDecode } from "jwt-decode";
 
 const BASEURL = getBaseUrl();
+export const DOC_URL = getDocUrl();
+
 
 export const axiosInstance = Axios.create({
   baseURL: BASEURL,
-  timeout: 20000,
+  timeout: 50000,
 });
 
 axiosInstance.defaults.headers["Access-Control-Allow-Origin"] = "*";

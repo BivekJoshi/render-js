@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from "react";
 import CustomTable from "../../../components/customtable/CustomTable";
 import { Avatar, Typography } from "@mui/material";
+import { DOC_URL } from "../../../api/axiosInterceptor";
 
 const StudentTableView = (studentData) => {
-  console.log(studentData?.studentData?.data?.data, "studentData");
+  // console.log(studentData?.studentData?.data?.data.user, "studentData");
 
   const columns = useMemo(
     () => [
@@ -17,7 +18,7 @@ const StudentTableView = (studentData) => {
           <div style={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
             <Avatar
               alt={row?.original?.user?.fullName}
-              src={row?.original?.user?.imageUrl}
+              src={DOC_URL + row?.original?.user?.imageUrl}
             />
             <Typography variant="h6">{row.original.user.fullName}</Typography>
           </div>
@@ -68,6 +69,7 @@ const StudentTableView = (studentData) => {
         title="Students"
         columns={columns}
         data={studentData?.studentData?.data?.data}
+        enableRowNumbers={true}
         // state={{
         //   isLoading: isLoading,
         //   showSkeletons: isLoading,

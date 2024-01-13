@@ -55,6 +55,7 @@ const Registation = () => {
       }}
       isLoading={isLoading}
       headerBackgroundColor="#259CE3"
+      enableRowNumbers={true}
       // headerColor={theme.palette.text.alt}
       // enableColumnActions
       // enableDelete

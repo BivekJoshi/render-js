@@ -83,8 +83,7 @@ const MaterialForm = () => {
           <TextField
             id="name"
             name="name"
-            label="University Name"
-            placeholder="Enter university name"
+            label="Study Material"
             fullWidth
             value={formik.values.name}
             onChange={formik.handleChange}
@@ -123,7 +122,6 @@ const MaterialForm = () => {
                   {option?.countryName}
                 </li>
               )}
-              style={{ width: 300 }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -139,7 +137,8 @@ const MaterialForm = () => {
                   size="small"
                   value={formik.values.ofCountryCodes}
                   focused
-                  InputLabelProps={{ shrink: true }}
+                  fullWidth
+                  // InputLabelProps={{ shrink: true }}
                 />
               )}
             />
@@ -150,6 +149,8 @@ const MaterialForm = () => {
               variant="contained"
               startIcon={<CloudUploadIcon />}
               onChange={handleChangeImage}
+              sx={{textTransform:'none'}}
+              fullWidth
             >
               Upload file
               <VisuallyHiddenInput type="file" />
@@ -168,14 +169,7 @@ const MaterialForm = () => {
             sx={{
               mt: 3,
               ml: 1,
-              color: "#000",
-              backgroundColor: "#E7E0EB",
               textTransform: "none",
-              border: "1px solid #6750A4",
-              "&:hover": {
-                backgroundColor: "#7d449d",
-                color: "#fff",
-              },
             }}
           >
             Upload

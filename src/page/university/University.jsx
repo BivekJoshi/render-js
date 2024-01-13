@@ -4,6 +4,7 @@ import { useGetUniversity } from "../../hooks/university/useUniversity";
 import CustomTable from "../../components/customtable/CustomTable";
 import UniversityForm from "../Form/University/UniversityForm";
 import FormModal from "../../components/modal/FormModal";
+import { DOC_URL } from "../../api/axiosInterceptor";
 
 const University = () => {
   const { data, isLoading } = useGetUniversity();
@@ -35,6 +36,33 @@ const University = () => {
         header: "URL",
         size: 400,
         sortable: false,
+        Cell: (row) => (
+          <div>
+            <a
+              href={row?.row?.original?.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {row?.row?.original?.url}
+            </a>
+          </div>
+        ),
+      },
+      {
+        id: 4,
+        accessorKey: "logoPath",
+        header: "Image",
+        Cell: ({ row }) => (
+          <div style={{ width: "120px", height: "120px" }}>
+            <img
+              alt={row?.original?.name}
+              src={DOC_URL + row?.original?.logoPath}
+              style={{ width: "100%", height: "100%" }}
+            />
+          </div>
+        ),
+        size: 130,
+        sortable: false,
       },
     ],
     []
@@ -62,6 +90,7 @@ const University = () => {
         }}
         isLoading={isLoading}
         headerBackgroundColor="#259CE3"
+        enableRowNumbers={true}
         // headerColor={theme.palette.text.alt}
         // enableColumnActions
         // enableDelete

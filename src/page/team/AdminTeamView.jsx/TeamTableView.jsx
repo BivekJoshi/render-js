@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from "react";
 import CustomTable from "../../../components/customtable/CustomTable";
 import { Avatar, Typography } from "@mui/material";
+import { DOC_URL } from "../../../api/axiosInterceptor";
+import { Link } from "react-router-dom";
 
 const TeamTableView = (staffData) => {
-console.log(staffData?.staffData?.data);
   const columns = useMemo(
     () => [
       {
@@ -16,7 +17,7 @@ console.log(staffData?.staffData?.data);
           <div style={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
             <Avatar
               alt={row?.original?.user?.fullName}
-              src={row?.original?.user?.imageUrl}
+              src={DOC_URL + row?.original?.user?.imageUrl}
             />
             <Typography variant="h6">{row.original.user.fullName}</Typography>
           </div>
@@ -26,14 +27,14 @@ console.log(staffData?.staffData?.data);
         id: 2,
         accessorKey: "user.gender",
         header: "Gender",
-        size: 100,
+        size: 130,
         sortable: false,
       },
       {
         id: 3,
         accessorKey: "user.dateOfBirth",
         header: "DOB",
-        size: 100,
+        size: 130,
         sortable: false,
       },
       {
@@ -42,12 +43,17 @@ console.log(staffData?.staffData?.data);
         header: "Email",
         size: 200,
         sortable: false,
+        Cell: ({ row }) => (
+          <Link>
+            <Typography variant="h6">{row.original.user.email}</Typography>
+          </Link>
+        ),
       },
       {
         id: 6,
         accessorKey: "user.mobileNumber",
         header: "Mobile Number",
-        size: 100,
+        size: 150,
         sortable: false,
       },
       {
@@ -72,6 +78,7 @@ console.log(staffData?.staffData?.data);
         // }}
         // isLoading={isLoading}
         headerBackgroundColor="#259CE3"
+        enableRowNumbers={true}
         // headerColor={theme.palette.text.alt}
         // enableColumnActions
         // enableDelete

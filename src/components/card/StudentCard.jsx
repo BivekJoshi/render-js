@@ -5,10 +5,12 @@ import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ProfileImage from "../../assets/AboutUs1.png";
+import { DOC_URL } from "../../api/axiosInterceptor";
 
-const StudentCard = ({name, mobileNumber, email, userType, imageUrl }) => {
+const StudentCard = ({ name, mobileNumber, email, userType, imageUrl }) => {
   const navigate = useNavigate();
 
+  const imageFinal = imageUrl ? DOC_URL + imageUrl : "";
   return (
     <>
       <Box>
@@ -63,7 +65,7 @@ const StudentCard = ({name, mobileNumber, email, userType, imageUrl }) => {
           >
             <CardMedia
               component="img"
-              src={imageUrl}
+              src={imageFinal}
               alt="Img"
               sx={{ width: 66, height: 66, borderRadius: "2rem" }}
             />

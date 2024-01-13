@@ -1,5 +1,13 @@
 import { useFormik } from "formik";
 import { useAddImage } from "../useNotice";
+import * as Yup from "yup";
+
+const NoticeSchema = Yup.object().shape({
+  title: Yup.string().required("Please enter notice title"),
+  description: Yup.string().required("Please enter notice description"),
+  endDateTime: Yup.string().required("Please select date for notice"),
+  redirectingUrl: Yup.string().required("Please enter a redirecting url"),
+});
 
 export const useNoticeForm = ({ selectedProfile }) => {
 
@@ -26,6 +34,8 @@ export const useNoticeForm = ({ selectedProfile }) => {
       noticeImage: selectedProfile,
       redirectingUrl: "",
     },
+    validationSchema: NoticeSchema,
+    enableReinitialize: true,
     onSubmit: (value) => {
     //   handleAddProfileImage(selectedProfile);
       handleRequest(value);

@@ -43,7 +43,7 @@ const ForgetPassword = () => {
             variant="h4"
             sx={{ display: "flex", justifyContent: "center" }}
           >
-            Forget Password?
+            Forgot Password?
           </Typography>
           <TextField
             id="email"

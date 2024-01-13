@@ -13,7 +13,6 @@ import I6 from "../../assets/Teacher/I6.jpeg";
 import I7 from "../../assets/Teacher/I7.jpg";
 import I8 from "../../assets/Teacher/I8.jpeg";
 
-
 const LIST = [
   {
     img: I1,
@@ -76,29 +75,36 @@ const Team = () => {
       </Grid>
       <br />
       <br />
-      <div style={{display:'flex',gap:'2rem',justifyContent:'space-around',flexWrap:'wrap'}}>
-      {LIST.map((data, index) => {
-        return (
-          <Card sx={{ maxWidth: 245 }}>
-            <CardMedia
-              sx={{ height: 140 }}
-              image={data?.img}
-              title="green iguana"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Name: {data?.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                 {data?.email}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {/* Post : CEO */}
-              </Typography>
-            </CardContent>
-          </Card>
-        );
-      })}
+      <div
+        style={{
+          display: "flex",
+          gap: "1rem",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        {LIST.map((data, index) => {
+          return (
+            <Card sx={{ maxWidth: 225 }}>
+              <CardMedia
+                sx={{ height: 140, width: "210px" }}
+                image={data?.img}
+                title="green iguana"
+              />
+              <CardContent sx={{height:'80px'}}>
+                <Typography gutterBottom variant="h5" component="div">
+                  Name: {data?.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {data?.email}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {/* Post : CEO */}
+                </Typography>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </Box>
   );

@@ -4,6 +4,7 @@ import { useGetCountry } from "../../../hooks/country/useCountry";
 import CustomTable from "../../../components/customtable/CustomTable";
 import CountryForm from "../../Form/Country/CountryForm";
 import FormModal from "../../../components/modal/FormModal";
+import { DOC_URL } from "../../../api/axiosInterceptor";
 
 const AdminCountry = () => {
   const { data, isLoading } = useGetCountry();
@@ -29,36 +30,58 @@ const AdminCountry = () => {
         id: 1,
         accessorKey: "countryCode",
         header: "Country Code",
-        size: 100,
+        size: 150,
         sortable: false,
       },
       {
         id: 2,
         accessorKey: "countryName",
         header: "Country Name",
-        size: 300,
+        size: 200,
         sortable: false,
+        Cell: (row) => (
+          <div
+            style={{
+              fontWeight:'bold',color:"#259CE3"
+            }}
+          >
+            {row?.row?.original?.countryName}
+          </div>
+        ),
       },
       {
         id: 3,
         accessorKey: "countryDescription",
         header: "Description",
-        size: 400,
+        size: 420,
         sortable: false,
+        Cell: (row) => (
+          <div
+            style={{
+              whiteSpace: "normal",
+              overflowWrap: "break-word",
+              wordWrap: "break-word",
+              wordBreak: "break-all",
+            }}
+          >
+            {row?.row?.original?.countryDescription}
+          </div>
+        ),
       },
       {
         id: 4,
         accessorKey: "imagePath",
         header: "Image",
         Cell: ({ row }) => (
-          <div style={{ width: "12%", height: "12%" }}>
+          <div style={{ width: "120px", height: "120px" }}>
             <img
-              alt={row.original.countryName}
-              src={row.original.imagePath}
+              alt={row?.original?.countryName}
+              src={DOC_URL + row?.original?.imagePath}
               style={{ width: "100%", height: "100%" }}
             />
           </div>
         ),
+        size: 130,
         sortable: false,
       },
     ],
@@ -96,6 +119,7 @@ const AdminCountry = () => {
         // handleNotification={notificationRoute}
         // delete
         // notification
+        enableRowNumbers={true}
         enableEditing={true}
         enableEdit
         edit
@@ -115,7 +139,7 @@ const AdminCountry = () => {
         onClose={handleModalEditClose}
         formComponent={
           <>
-            <CountryForm onClose={() => setOpenCountry(false)} data={rowData}/>
+            <CountryForm onClose={() => setOpenCountry(false)} data={rowData} />
           </>
         }
       />
