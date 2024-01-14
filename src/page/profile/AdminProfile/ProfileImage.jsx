@@ -6,7 +6,8 @@ import LocalSeeIcon from "@mui/icons-material/LocalSee";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ProfileImage1 from "../../../assets/AboutUs1.png";
 
-const ProfileImage = ({ userInfoData }) => {
+const ProfileImage = ( data ) => {
+  console.log(data,"datajnjsanx");
 //   const [time, setTime] = useState(Date.now());
 //   const [openEditModal, setOpenEditModal] = useState(false);
 //   const url = DOC_URL;

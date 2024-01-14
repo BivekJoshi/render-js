@@ -38,6 +38,7 @@ export const addCountry = async (formData, selectedProfile) => {
 
 /*________________________Edit COUNTRY_____________________________________*/
 export const editCountry = async (formData, selectedProfile) => {
+  console.log(selectedProfile,"form Data ");
   const imgData = new FormData();
   imgData.append("imageFile", selectedProfile);
 
@@ -46,16 +47,20 @@ export const editCountry = async (formData, selectedProfile) => {
       imgData.append(key, formData[key]);
     }
   });
-  try {
+
+  // try {
     const response = await axiosInstance.put(`v1/country/save`, imgData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
 
-    return response.data;
-  } catch (error) {
-    console.error("Error editing notice:", error);
-    throw error;
-  }
+  //   console.log("PUT Request Response:", response);
+
+  //   return response.data;
+  // } catch (error) {
+  //   console.error("Error editing country:", error);
+  //   throw error;
+  // }
 };
+

@@ -9,14 +9,16 @@ import {
 } from "../../../hooks/country/useCountry";
 import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 import RemarkField from "../../../components/form/RemarkField";
+import { DOC_URL } from "../../../api/axiosInterceptor";
 
-const UniversityForm = ({ userInfoData }) => {
+const UniversityForm = ({ userInfoData, data }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const { data: countryData, isLoading } = useGetCountryCode();
 
   const { formik } = useUniversityForm({
     selectedProfile,
+    data,
   });
 
   const handleChangeImage = (e) => {
@@ -41,27 +43,19 @@ const UniversityForm = ({ userInfoData }) => {
   };
 
   return (
-    <Grid
-      container
-      spacing={3}
-      margin="0"
-      justifyContent="center"
-      width="100%"
-    >
+    <Grid container spacing={3} margin="0" justifyContent="center" width="100%">
       <Grid item xs={5}>
         <Box>
           {!imagePreview ? (
-            userInfoData?.imageFilePath ? (
-              // <img
-              //   src={`${DOC_URL}${userInfoData?.imageFilePath}`}
-              //   alt="Profile"
-              //   height="auto"
-              //   width="200px"
-              //   style={{ borderRadius: "20%" }}
-              // />
-              <div>image</div>
+            data ? (
+              <img
+                src={DOC_URL + data?.logoPath}
+                alt="Profile"
+                height="200px"
+                width="180px"
+              />
             ) : (
-              <div style={{height:"140px" }}>
+              <div style={{ height: "140px" }}>
                 <img
                   src={BlankImage}
                   style={{ width: "100%", height: "100%" }}

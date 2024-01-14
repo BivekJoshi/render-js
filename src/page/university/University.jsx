@@ -9,9 +9,19 @@ import { DOC_URL } from "../../api/axiosInterceptor";
 const University = () => {
   const { data, isLoading } = useGetUniversity();
   const [openUniversity, setOpenUniversity] = useState(false);
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [rowData, setRowData] = useState();
 
   const handleButtonClick = () => {
     setOpenUniversity(true);
+  };
+
+  const handleModalEditClose = () => {
+    setIsModalEditOpen(false);
+  };
+  const editRow = (row) => {
+    setIsModalEditOpen(true);
+    setRowData(row?.original);
   };
 
   const columns = useMemo(
@@ -99,6 +109,10 @@ const University = () => {
         // handleNotification={notificationRoute}
         // delete
         // notification
+        enableEditing={true}
+        enableEdit
+        edit
+        handleEdit={editRow}
       />
       {openUniversity && (
         <FormModal
@@ -110,6 +124,15 @@ const University = () => {
           }
         />
       )}
+      <FormModal
+        open={isModalEditOpen}
+        onClose={handleModalEditClose}
+        formComponent={
+          <>
+            <UniversityForm onClose={() => setOpenCountry(false)} data={rowData} />
+          </>
+        }
+      />
     </>
   );
 };

@@ -15,7 +15,7 @@ export const axiosInstance = Axios.create({
 axiosInstance.defaults.headers["Access-Control-Allow-Origin"] = "*";
 axiosInstance.defaults.headers["Accept"] = "*";
 axiosInstance.defaults.headers["Access-Control-Allow-Headers"] = "Origin";
-axiosInstance.defaults.headers["Access-Control-Allow-Method"] = "POST";
+axiosInstance.defaults.headers["Access-Control-Allow-Method"] = "POST, PUT";
 
 const checkIfExpired = (token) => {
   if (token) {

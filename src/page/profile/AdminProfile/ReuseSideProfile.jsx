@@ -49,7 +49,7 @@ const ReuseSideProfile = ({ value, handleChange, loggedinUserData }) => {
           position="relative"
           padding="16px"
         >
-          <ProfileImage />
+          <ProfileImage data={loggedinUserData?.data}/>
           <Grid display="flex" flexDirection="column" gap="8px">
             <Typography variant="h6">
               {loggedinUserData?.data?.fullName}

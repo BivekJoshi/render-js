@@ -5,6 +5,7 @@ import useCountryForm from "../../../hooks/country/Country/useCountryForm";
 import BlankImage from "../../../assets/BlankImage.jpg";
 import RemarkField from "../../../components/form/RemarkField";
 import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
+import { DOC_URL } from "../../../api/axiosInterceptor";
 
 const CountryForm = ({ userInfoData ,data}) => {
 
@@ -44,16 +45,16 @@ const CountryForm = ({ userInfoData ,data}) => {
     >
       <Grid item xs={5}>
         <Box>
+
           {!imagePreview ? (
-            userInfoData?.imageFilePath ? (
-              // <img
-              //   src={`${DOC_URL}${userInfoData?.imageFilePath}`}
-              //   alt="Profile"
-              //   height="auto"
-              //   width="200px"
-              //   style={{ borderRadius: "20%" }}
-              // />
-              <div>image</div>
+            data ? (
+
+              <img
+                src={DOC_URL + data?.imagePath}
+                alt="Profile"
+                height="200px"
+                width="180px"
+              />
             ) : (
               <div style={{ height: "200px" }}>
                 <img
