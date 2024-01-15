@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
-import { addUniversity, editUniversity, getUniversity } from "../../api/university/university-api";
+import { addUniversity, addUniversityImage, editUniversity, getUniversity } from "../../api/university/university-api";
 
 /*________________________EDIT UNIVERSITY_____________________________________*/
 export const useAddUniversity = ({ onSuccess, selectedProfile }) => {
@@ -43,6 +43,27 @@ export const useEditUniversity = ({ onSuccess, selectedProfile }) => {
       onSuccess: (data, variables, context) => {
         onSuccess && onSuccess(data, variables, context);
         toast.success("Successfully edited University");
+        queryClient.invalidateQueries('getUniversity');
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(err);
+      },
+    }
+  );
+};
+
+/*________________________EDIT UNIVERSITY IMAGE_____________________________________*/
+export const useAddUniversityImage = ({ onSuccess, selectedProfile }) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ["addUniversityImage"],
+    (formData) => {
+      return addUniversityImage(formData,selectedProfile);
+    },
+    {
+      onSuccess: (data, variables, context) => {
+        onSuccess && onSuccess(data, variables, context);
+        toast.success("Successfully edited University Logo");
         queryClient.invalidateQueries('getUniversity');
       },
       onError: (err, _variables, _context) => {

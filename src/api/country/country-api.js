@@ -36,31 +36,50 @@ export const addCountry = async (formData, selectedProfile) => {
   }
 };
 
-/*________________________Edit COUNTRY_____________________________________*/
-export const editCountry = async (formData, selectedProfile) => {
-  console.log(selectedProfile,"form Data ");
+/*________________________POST COUNTRY IMAGE_____________________________________*/
+export const editCountryImg = async (formData, selectedProfile) => {
   const imgData = new FormData();
   imgData.append("imageFile", selectedProfile);
 
   Object.keys(formData).forEach((key) => {
-    if (key !== "imageFile") {
+    if (key === "imageFile") {
       imgData.append(key, formData[key]);
     }
   });
-
-  // try {
-    const response = await axiosInstance.put(`v1/country/save`, imgData, {
+  try {
+    const response = await axiosInstance.post(`v1/country/upload-file`, imgData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
 
-  //   console.log("PUT Request Response:", response);
-
-  //   return response.data;
-  // } catch (error) {
-  //   console.error("Error editing country:", error);
-  //   throw error;
-  // }
+    return response.data;
+  } catch (error) {
+    console.error("Error adding notice:", error);
+    throw error;
+  }
 };
 
+/*________________________Edit COUNTRY_____________________________________*/
+export const editCountry = async (formData, selectedProfile) => {
+  // const imgData = new FormData();
+  // imgData.append("imageFile", selectedProfile);
+
+  // Object.keys(formData).forEach((key) => {
+  //   if (key !== "imageFile") {
+  //     imgData.append(key, formData[key]);
+  //   }
+  // });
+
+  try {
+    const response = await axiosInstance.put(`v1/country/save`,formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error editing country:", error);
+    throw error;
+  }
+};

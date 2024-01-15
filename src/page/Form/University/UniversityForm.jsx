@@ -11,7 +11,7 @@ import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 import RemarkField from "../../../components/form/RemarkField";
 import { DOC_URL } from "../../../api/axiosInterceptor";
 
-const UniversityForm = ({ userInfoData, data }) => {
+const UniversityForm = ({ data }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const { data: countryData, isLoading } = useGetCountryCode();
@@ -35,7 +35,7 @@ const UniversityForm = ({ userInfoData, data }) => {
     }
   };
   const handleSubmit = () => {
-    if (selectedProfile) {
+    if (selectedProfile || data) {
       formik.submitForm();
     } else {
       toast.error("Please select image first");

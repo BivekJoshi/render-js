@@ -38,9 +38,11 @@ export const useLogin = ({ onSuccess }) => {
         toast.success("Login Successful");
         queryClient.invalidateQueries("getLoggedinUserDetail");
         if (data?.userType === "SUPER_ADMIN") {
-          navigate("/adminProfile");
-        } else {
+          navigate("/superAdminProfile");
+        } else if(data?.userType==="STUDENT"){
           navigate("/studentProfile");
+        }else{
+          navigate("/adminProfile");
         }
       },
       onError: (err, _variables, _context) => {

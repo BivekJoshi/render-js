@@ -6,7 +6,6 @@ import { jwtDecode } from "jwt-decode";
 const BASEURL = getBaseUrl();
 export const DOC_URL = getDocUrl();
 
-
 export const axiosInstance = Axios.create({
   baseURL: BASEURL,
   timeout: 50000,
@@ -15,7 +14,7 @@ export const axiosInstance = Axios.create({
 axiosInstance.defaults.headers["Access-Control-Allow-Origin"] = "*";
 axiosInstance.defaults.headers["Accept"] = "*";
 axiosInstance.defaults.headers["Access-Control-Allow-Headers"] = "Origin";
-axiosInstance.defaults.headers["Access-Control-Allow-Method"] = "POST, PUT";
+axiosInstance.defaults.headers["Access-Control-Allow-Method"] = "PUT,POST,GET";
 
 const checkIfExpired = (token) => {
   if (token) {

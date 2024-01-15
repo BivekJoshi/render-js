@@ -1,5 +1,9 @@
 import { useFormik } from "formik";
-import { useAddCountry, useEditCountry } from "../useCountry";
+import {
+  useAddCountry,
+  useEditCountry,
+  useEditCountryImg,
+} from "../useCountry";
 import * as Yup from "yup";
 
 const CountrySchema = Yup.object().shape({
@@ -8,9 +12,10 @@ const CountrySchema = Yup.object().shape({
   countryName: Yup.string().required("Please enter country name"),
 });
 
-export const useCountryForm = ({ selectedProfile ,data}) => {
+export const useCountryForm = ({ selectedProfile, data }) => {
   const { mutate } = useAddCountry({ selectedProfile });
-  const { mutate :editMutate} = useEditCountry({ selectedProfile });
+  const { mutate: editMutate } = useEditCountry({ selectedProfile });
+  const { mutate: editImgMutate } = useEditCountryImg({ selectedProfile });
 
   const handleRequest = (value) => {
     value = { ...value };
@@ -28,12 +33,21 @@ export const useCountryForm = ({ selectedProfile ,data}) => {
       },
     });
   };
+  const handledEditImgRequest = (value) => {
+    value = { ...value };
+    editImgMutate(value, {
+      onSuccess: () => {
+        formik.resetForm();
+      },
+    });
+  };
   const formik = useFormik({
     initialValues: {
-      countryCode: data?.countryCode||"",
-      countryDescription: data?.countryDescription||"",
-      countryName: data?.countryName||"",
+      countryCode: data?.countryCode || "",
+      countryDescription: data?.countryDescription || "",
+      countryName: data?.countryName || "",
       // imageFile: selectedProfile,
+      id: data?.id || "",
     },
     validationSchema: CountrySchema,
     enableReinitialize: true,
@@ -41,6 +55,7 @@ export const useCountryForm = ({ selectedProfile ,data}) => {
       // handleRequest(value);
       if (data) {
         handledEditRequest(value);
+        handledEditImgRequest(value);
       } else {
         handleRequest(value);
       }

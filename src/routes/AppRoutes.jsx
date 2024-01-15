@@ -20,6 +20,7 @@ import Team from "../page/team/Team";
 import StudentProfile from "../page/profile/StudentProfile.jsx/StudentProfile";
 import { useGetLoggedInUserDetail } from "../hooks/auth/useAuth";
 import ChangePassword from "../page/auth/ChangePassword";
+import SuperAdminProfile from "../page/profile/SuperAdminProfile/SuperAdminProfile";
 
 const AppRoutes = () => {
   const { data } = useGetLoggedInUserDetail();
@@ -51,6 +52,10 @@ const AppRoutes = () => {
           <Route
             path="/adminProfile"
             element={<AdminProfile data={data?.data} />}
+          />
+          <Route
+            path="/superAdminProfile"
+            element={<SuperAdminProfile data={data?.data} />}
           />
           <Route path="/team" element={<Team />} />
         </Route>

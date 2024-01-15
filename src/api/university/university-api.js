@@ -34,8 +34,9 @@ export const getUniversity = async () => {
 /*________________________EDIT UNIVERSITY_____________________________________*/
 export const editUniversity = async (formData, selectedProfile) => {
   const imgData = new FormData();
-  imgData.append("universityLogo", selectedProfile);
-
+  if (selectedProfile) {
+    imgData.append("universityLogo", selectedProfile);
+  }
   Object.keys(formData).forEach((key) => {
     if (key !== "universityLogo") {
       imgData.append(key, formData[key]);
@@ -44,6 +45,24 @@ export const editUniversity = async (formData, selectedProfile) => {
 
   try {
     const response = await axiosInstance.put(`v1/university/save`, imgData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error adding university:", error);
+    throw error;
+  }
+};
+
+/*________________________POST UNIVERSITY IMAGE_____________________________________*/
+export const addUniversityImage = async (formData, selectedProfile) => {
+  const imgData = new FormData();
+  imgData.append("universityLogo", selectedProfile);
+  try {
+    const response = await axiosInstance.post(`v1/university/upload-file`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
