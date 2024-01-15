@@ -9,7 +9,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { Avatar, Box, Container, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/RenderLogoFull.png";
-import { getStoredFullName, getUser, removeUser } from "../../utility/cookieHelper";
+import { removeUser } from "../../utility/cookieHelper";
+import { DOC_URL } from "../../api/axiosInterceptor";
 
 const navItem = [
   {
@@ -49,16 +50,14 @@ const navItem = [
   },
 ];
 
-function Navbar() {
+function Navbar({ data }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [activePage, setActivePage] = React.useState("/home");
   const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
-  const [storedFullName, setStoredFullName] = React.useState("");
 
   const navigate = useNavigate();
-  const data = getUser();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -78,25 +77,24 @@ function Navbar() {
   const handleCloseProfile = () => {
     setAnchorEl(null);
   };
-  const handleClickChangePassword=()=>{
-    navigate(`/ric/reset-password`)
+  const handleClickChangePassword = () => {
+    navigate(`/ric/reset-password`);
     handleCloseProfile();
-  }
-  const handleClickProfile=()=>{
-    navigate(`/adminProfile`)
-    handleCloseProfile();
-  }
-  const handleClickLogout=()=>{
-    removeUser();
-    navigate(`/`)
-    handleCloseProfile();
-  }
-
-  React.useEffect(() => {
-    if (getStoredFullName) {
-      setStoredFullName(getStoredFullName);
+  };
+  const handleClickProfile = () => {
+    if (data?.userType !== "STUDENT") {
+      navigate(`/adminProfile`);
+    } else {
+      navigate(`/studentProfile`);
     }
-  }, []);
+
+    handleCloseProfile();
+  };
+  const handleClickLogout = () => {
+    removeUser();
+    navigate(`/`);
+    handleCloseProfile();
+  };
 
   return (
     <Box sx={{ padding: ".5rem", background: "#E6E6E6" }}>
@@ -225,10 +223,12 @@ function Navbar() {
                     sx={{ display: "flex", alignItems: "center", gap: ".5rem" }}
                   >
                     <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
+                      alt={data?.fullName}
+                      src={DOC_URL + data?.imageUrl}
                     />
-                    <b style={{color:'#1A75BD'}}>{isXsScreen ? "" : storedFullName}</b>
+                    <b style={{ color: "#1A75BD" }}>
+                      {isXsScreen ? "" : data?.fullName}
+                    </b>
                   </Typography>
                 </div>
                 <Menu

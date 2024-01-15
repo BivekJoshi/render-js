@@ -6,13 +6,15 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { useMemo } from "react";
 import { themeSettings } from "../../theme";
 import "./font-family.css";
-const Applayout = () => {
+import SpeedDiall from "../SpeedDial/SpeedDial";
+
+const Applayout = ({ data }) => {
   const theme = useMemo(() => createTheme(themeSettings()));
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <div style={{ position: "fixed", zIndex: 100, width: "100%" ,top:0}}>
-          <Navbar />
+        <div style={{ position: "fixed", zIndex: 100, width: "100%", top: 0 }}>
+          <Navbar data={data}/>
         </div>
         <br />
         <br />
@@ -27,8 +29,9 @@ const Applayout = () => {
           <Outlet />
         </div>
         <div>
-        <FooterInfo style={{width:"100%"}}/>
+          <FooterInfo style={{ width: "100%" }} />
         </div>
+        {data?.userType === "STUDENT" ? <SpeedDiall /> : ""}
       </div>
     </ThemeProvider>
   );

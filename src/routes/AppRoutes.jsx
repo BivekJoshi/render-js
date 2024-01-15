@@ -18,12 +18,15 @@ import ForgetPassword from "../page/auth/ForgetPassword";
 import ResetPassword from "../page/auth/ResetPassword";
 import Team from "../page/team/Team";
 import StudentProfile from "../page/profile/StudentProfile.jsx/StudentProfile";
+import { useGetLoggedInUserDetail } from "../hooks/auth/useAuth";
 
 const AppRoutes = () => {
+  const { data } = useGetLoggedInUserDetail();
+  // console.log(data?.data,"data masxiansjxnjasnxinasxn");
   return (
     <HashRouter hashType="slash">
       <Routes>
-        <Route path="/" element={<Applayout />}>
+        <Route path="/" element={<Applayout data={data?.data} />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/authRegister" element={<AuthRegistation />} />
@@ -33,13 +36,19 @@ const AppRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/aboutus" element={<AboutFinal />} />
           <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/studentProfile" element={<StudentProfile />} />
+          <Route
+            path="/studentProfile"
+            element={<StudentProfile data={data?.data} />}
+          />
           <Route path="/countries" element={<Countries />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/news&events" element={<NewsEvents />} />
-          <Route path="/adminProfile" element={<AdminProfile/>} />
-          <Route path="/team" element={<Team/>} />
+          <Route
+            path="/adminProfile"
+            element={<AdminProfile data={data?.data} />}
+          />
+          <Route path="/team" element={<Team />} />
         </Route>
       </Routes>
     </HashRouter>

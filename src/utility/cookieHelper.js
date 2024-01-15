@@ -13,8 +13,4 @@ export const removeUser = () => {
   localStorage.clear();
 };
 
-export const getStoredFullName = () => {
-  return localStorage.getItem("fullName");
-};
-
 // window.addEventListener("beforeunload", removeUser);

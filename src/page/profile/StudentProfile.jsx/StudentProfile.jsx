@@ -17,22 +17,16 @@ import {
 import { TabContext, TabPanel } from "@mui/lab";
 import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
 
-import { useGetLoggedInUserDetail } from "../../../hooks/auth/useAuth";
 import ReUseSideStudentProfile from "./ReUseSideStudentProfile";
 import ProfileDetail from "../ProfileDetail";
 
 
-const StudentProfile = () => {
+const StudentProfile = ({data:loggedinUserData}) => {
   const theme = useTheme();
   const [value, setValue] = useState("1");
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const isSm = useMediaQuery(theme.breakpoints.down("md"));
-
-  const { data: loggedinUserData, isLoading } = useGetLoggedInUserDetail();
-
-  const fullName = loggedinUserData?.data?.fullName;
-  localStorage.setItem("fullName", fullName);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -75,7 +69,7 @@ const StudentProfile = () => {
             <Tooltip title="Profile Menu">
               <div style={{ display: "flex" }}>
                 <AccountCircleTwoToneIcon />
-                <Typography>{loggedinUserData?.data?.fullName}</Typography>
+                <Typography>{loggedinUserData?.fullName}</Typography>
               </div>
             </Tooltip>
           </IconButton>

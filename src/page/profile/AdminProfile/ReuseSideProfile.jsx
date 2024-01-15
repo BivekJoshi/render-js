@@ -17,7 +17,7 @@ import CloudQueueTwoToneIcon from "@mui/icons-material/CloudQueueTwoTone";
 import HistoryEduTwoToneIcon from "@mui/icons-material/HistoryEduTwoTone";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { useGetRegistation } from "../../../hooks/registation/useRegistation";
-import Diversity1TwoToneIcon from '@mui/icons-material/Diversity1TwoTone';
+import Diversity1TwoToneIcon from "@mui/icons-material/Diversity1TwoTone";
 
 const labelStyle = {
   backgroundColor: "transparent",
@@ -49,18 +49,14 @@ const ReuseSideProfile = ({ value, handleChange, loggedinUserData }) => {
           position="relative"
           padding="16px"
         >
-          <ProfileImage data={loggedinUserData?.data}/>
+          <ProfileImage data={loggedinUserData?.data} />
           <Grid display="flex" flexDirection="column" gap="8px">
-            <Typography variant="h6">
-              {loggedinUserData?.data?.fullName}
-            </Typography>
+            <Typography variant="h6">{loggedinUserData?.fullName}</Typography>
+            <Typography variant="h7">{loggedinUserData?.email}</Typography>
             <Typography variant="h7">
-              {loggedinUserData?.data?.email}
+              {loggedinUserData?.mobileNumber}
             </Typography>
-            <Typography variant="h7">
-              {loggedinUserData?.data?.mobileNumber}
-            </Typography>
-            <ProfileButton userType={loggedinUserData?.data?.userType} />
+            <ProfileButton userType={loggedinUserData?.userType} />
           </Grid>
         </Grid>
 
@@ -189,13 +185,24 @@ const ReuseSideProfile = ({ value, handleChange, loggedinUserData }) => {
             <Tab
               label={
                 <Grid
-                  sx={{ display: "flex", alignItems: "center", justifyContent:'space-between',width:'100%' }}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
                 >
-                  <div style={{display:"flex",aliginItem:'center',gap:"1rem"}}>
+                  <div
+                    style={{
+                      display: "flex",
+                      aliginItem: "center",
+                      gap: "1rem",
+                    }}
+                  >
                     <HowToRegIcon fontSize="medium" sx={{ color: "#1565C0" }} />
                     <Typography variant="h7">Applicants</Typography>
                   </div>
-                  <Chip label={data?.data?.data?.length} color="success"/>
+                  <Chip label={data?.data?.data?.length} color="success" />
                 </Grid>
               }
               value="6"

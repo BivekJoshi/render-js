@@ -31,18 +31,18 @@ const ReUseSideStudentProfile = ({ value, handleChange, loggedinUserData }) => {
           position="relative"
           padding="16px"
         >
-          <ProfileImage />
+          <ProfileImage loggedinUserData={loggedinUserData}/>
           <Grid display="flex" flexDirection="column" gap="8px">
             <Typography variant="h6">
-              {loggedinUserData?.data?.fullName}
+              {loggedinUserData?.fullName}
             </Typography>
             <Typography variant="h7">
-              {loggedinUserData?.data?.email}
+              {loggedinUserData?.email}
             </Typography>
             <Typography variant="h7">
-              {loggedinUserData?.data?.mobileNumber}
+              {loggedinUserData?.mobileNumber}
             </Typography>
-            <ProfileButton userType={loggedinUserData?.data?.userType} />
+            <ProfileButton userType={loggedinUserData?.userType} />
           </Grid>
         </Grid>
 

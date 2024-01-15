@@ -34,17 +34,12 @@ const menuItems = [
   { label: "Material", component: <Material /> },
 ];
 
-const AdminProfile = () => {
+const AdminProfile = ({ data: loggedinUserData }) => {
   const theme = useTheme();
   const [value, setValue] = useState("1");
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const isSm = useMediaQuery(theme.breakpoints.down("md"));
-
-  const { data: loggedinUserData, isLoading } = useGetLoggedInUserDetail();
-
-  const fullName = loggedinUserData?.data?.fullName;
-  localStorage.setItem("fullName", fullName);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -87,7 +82,7 @@ const AdminProfile = () => {
             <Tooltip title="Profile Menu">
               <div style={{ display: "flex" }}>
                 <AccountCircleTwoToneIcon />
-                <Typography>{loggedinUserData?.data?.fullName}</Typography>
+                <Typography>{loggedinUserData?.fullName}</Typography>
               </div>
             </Tooltip>
           </IconButton>
@@ -102,7 +97,7 @@ const AdminProfile = () => {
           }}
           className="profileNavBar"
         >
-          <div style={{backgroundColor:'#E6E6E6',padding:'12px'}}>
+          <div style={{ backgroundColor: "#E6E6E6", padding: "12px" }}>
             <ReuseSideProfile
               value={value}
               handleChange={handleChange}
