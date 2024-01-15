@@ -19,9 +19,11 @@ import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
 
 import ReUseSideStudentProfile from "./ReUseSideStudentProfile";
 import ProfileDetail from "../ProfileDetail";
+import StudyMaterial from "../../STUDENTVIEW/studyMaterial/StudyMaterial";
+import CardNews from "../../gallery/Carroussel/CardNews";
+import TestimonialForm from "../../Form/Testimonial/TestimonialForm";
 
-
-const StudentProfile = ({data:loggedinUserData}) => {
+const StudentProfile = ({ data: loggedinUserData }) => {
   const theme = useTheme();
   const [value, setValue] = useState("1");
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -101,6 +103,33 @@ const StudentProfile = ({data:loggedinUserData}) => {
             }}
           >
             <ProfileDetail />
+          </Box>
+        </TabPanel>
+        <TabPanel sx={{ p: 0 }} value="2">
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              borderRadius: ".5rem",
+              padding: "1rem",
+            }}
+          >
+            <StudyMaterial />
+          </Box>
+        </TabPanel>
+        <TabPanel sx={{ p: 0 }} value="3">
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              borderRadius: ".5rem",
+              padding: "1rem",
+              height: "100%",
+            }}
+          >
+            <Typography variant="h4">
+              Please write your experience and share your feedback
+            </Typography>
+            <br/>
+            <TestimonialForm />
           </Box>
         </TabPanel>
       </TabContext>

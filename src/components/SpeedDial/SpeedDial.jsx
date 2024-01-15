@@ -10,6 +10,11 @@ import QrCodeScannerRoundedIcon from "@mui/icons-material/QrCodeScannerRounded";
 import FeedbackRoundedIcon from "@mui/icons-material/FeedbackRounded";
 import FormModal from "../modal/FormModal";
 import TestimonialForm from "../../page/Form/Testimonial/TestimonialForm";
+import Icon1 from "../../assets/Icon/facebook.png";
+import Icon2 from "../../assets/Icon/insta.png";
+import Icon3 from "../../assets/Icon/P@.png";
+import Icon4 from "../../assets/Icon/youtube.png";
+import { Typography } from "@mui/material";
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   position: "fixed",
@@ -25,16 +30,25 @@ const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
 
 const actions = [
   { icon: <FeedbackRoundedIcon />, name: "Feed back" },
-  { icon: <SaveIcon />, name: "Save" },
   { icon: <QrCodeScannerRoundedIcon />, name: "Follow Us on" },
   { icon: <ShareIcon />, name: "Share" },
 ];
 
 export default function SpeedDiall() {
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = React.useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleOpenFeedbackModal = () => {
     setIsFeedbackModalOpen(true);
+  };
+
+  const handleOpenShareModal = () => {
+    setIsShareModalOpen(true);
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
   };
 
   return (
@@ -60,7 +74,13 @@ export default function SpeedDiall() {
           icon={action.icon}
           tooltipTitle={action.name}
           onClick={
-            action.name === "Feed back" ? handleOpenFeedbackModal : undefined
+            action.name === "Feed back"
+              ? handleOpenFeedbackModal
+              : undefined || action.name === "Follow Us on"
+              ? handleOpenShareModal
+              : undefined || action.name === "Share"
+              ? handleOpenModal
+              : undefined
           }
         />
       ))}
@@ -70,7 +90,69 @@ export default function SpeedDiall() {
           open={isFeedbackModalOpen}
           onClose={() => setIsFeedbackModalOpen(false)}
           formComponent={
-            <TestimonialForm onClose={()=>setIsFeedbackModalOpen(false)}/>
+            <TestimonialForm onClose={() => setIsFeedbackModalOpen(false)} />
+          }
+        />
+      )}
+      {isShareModalOpen && (
+        <FormModal
+          title="Follow Us on"
+          open={isShareModalOpen}
+          onClose={() => setIsShareModalOpen(false)}
+          formComponent={
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <img src={Icon1} alt="facebook" />
+                <Typography>Facebook</Typography>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <img src={Icon2} alt="facebook" />
+                <Typography>Instagram</Typography>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <img src={Icon3} alt="Pi" />
+                <Typography>P@</Typography>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <img src={Icon4} alt="youtube" />
+                <Typography>Youtube</Typography>
+              </div>
+            </div>
+          }
+        />
+      )}
+      {isModalOpen && (
+        <FormModal
+          title="Share with your Friends"
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          formComponent={
+            <div><Typography variant="h4"><b>https://render.edu.np</b></Typography></div>
           }
         />
       )}

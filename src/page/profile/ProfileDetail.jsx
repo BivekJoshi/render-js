@@ -1,8 +1,12 @@
 import React from "react";
 import DonutChart from "../../components/chart/DonutChart";
-import { Avatar, Grid, Typography } from "@mui/material";
+import { Avatar, AvatarGroup, Grid, Typography } from "@mui/material";
+import { useGetStaff } from "../../hooks/staff/useStaff";
+import { DOC_URL } from "../../api/axiosInterceptor";
 
 const ProfileDetail = () => {
+  const { data: staffData, isLoading } = useGetStaff();
+  console.log(staffData, "staffData");
   return (
     <Grid container spacing={2}>
       <Grid item xs={6}>
@@ -28,23 +32,27 @@ const ProfileDetail = () => {
           <Typography variant="p">Joined since Jan 2020</Typography>
           <br />
           <Typography variant="h5">
-            <b>Teachers (5)</b>
+            <b>Teachers</b>
           </Typography>
           <br />
-          <div style={{ display: "flex", gap: "1rem" }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-          </div>
+          <AvatarGroup>
+            {staffData?.data?.map((data, index) => {
+              return (
+                <Avatar
+                  alt={data?.user?.fullName}
+                  src={DOC_URL + data?.user?.imageUrl}
+                  sx={{ width: 56, height: 56 }}
+                />
+              );
+            })}
+          </AvatarGroup>
           <Typography
             variant="h5"
             sx={{
               marginTop: "4rem",
               padding: "1rem",
               borderBottom: "1px solid black",
-              cursor:"pointer"
+              cursor: "pointer",
             }}
           >
             Study Materials Links

@@ -7,7 +7,7 @@ export const getMaterial = async () => {
   };
 
 export const addMaterial = async (formData, selectedProfile) => {
-
+console.log(formData,"najsnxasjxasjklxmasnxasxasx");
   const imgData = new FormData();
   imgData.append("materialFile ", selectedProfile);
 

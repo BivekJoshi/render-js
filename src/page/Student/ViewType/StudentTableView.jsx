@@ -19,6 +19,7 @@ const StudentTableView = (studentData) => {
             <Avatar
               alt={row?.original?.user?.fullName}
               src={DOC_URL + row?.original?.user?.imageUrl}
+              sx={{ width: 56, height: 56 }}
             />
             <Typography variant="h6">{row.original.user.fullName}</Typography>
           </div>

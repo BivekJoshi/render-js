@@ -37,7 +37,6 @@ const MaterialForm = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
   const { data: countryData, isLoading } = useGetCountryCode();
-  console.log(countryData);
 
   const { formik } = useMaterialForm({
     selectedProfile,
@@ -106,7 +105,7 @@ const MaterialForm = () => {
                 if (newValue != null) {
                   const multiScript = newValue.map((d) => d.countryCode);
 
-                  formik.setFieldValue("countryCode", multiScript);
+                  formik.setFieldValue("ofCountryCodes", multiScript);
                   setSelectedSymbol(newValue);
                 }
               }}

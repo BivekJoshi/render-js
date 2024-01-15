@@ -39,12 +39,28 @@ export const userTypeOptions = [
 ];
 export const maritalStatus = [
   {
+    value: "SINGLE",
+    label: "Single",
+  },
+  {
     value: "MARRIED",
     label: "Married",
   },
   {
-    value: "UNMARRIED",
-    label: "Unmarried",
+    value: "WIDOWED",
+    label: "Widowed",
+  },
+  {
+    value: "DIVORCED",
+    label: "Divorced",
+  },
+  {
+    value: "SEPARATED",
+    label: "Seperated",
+  },
+  {
+    value: "REGISTERED_PARTNERSHIP",
+    label: "Registered partnership",
   },
 ];
 

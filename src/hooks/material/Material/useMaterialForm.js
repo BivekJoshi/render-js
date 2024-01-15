@@ -21,7 +21,6 @@ export const useMaterialForm = ({ selectedProfile }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      materialFile: selectedProfile,
       ofCountryCodes: "",
     },
     validationSchema: materialSchema,
