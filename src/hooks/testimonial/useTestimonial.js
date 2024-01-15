@@ -1,5 +1,5 @@
-import { useMutation } from "react-query";
-import { addTestimonial } from "../../api/testimonial/testimonial-api";
+import { useMutation, useQuery } from "react-query";
+import { addTestimonial, getTestimonial } from "../../api/testimonial/testimonial-api";
 
 /*_____________________________POST TESTIMONIAL_______________________________________________ */
 export const useAddTestimonial = ({ onSuccess }) => {
@@ -16,4 +16,12 @@ export const useAddTestimonial = ({ onSuccess }) => {
       },
     }
   );
+};
+
+/*_____________________________GET TESTIMONIAL_______________________________________________ */
+export const useGetTestimonial = () => {
+  return useQuery(["getTestimonial"], () => getTestimonial(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };

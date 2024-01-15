@@ -78,7 +78,7 @@ function Navbar({ data }) {
     setAnchorEl(null);
   };
   const handleClickChangePassword = () => {
-    navigate(`/ric/reset-password`);
+    navigate(`/change-password`);
     handleCloseProfile();
   };
   const handleClickProfile = () => {

@@ -208,6 +208,21 @@ const ReuseSideProfile = ({ value, handleChange, loggedinUserData }) => {
               value="6"
               style={value === "6" ? activeLabelStyle : labelStyle}
             />
+            <Tab
+              label={
+                <Grid
+                  sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
+                >
+                  <CloudQueueTwoToneIcon
+                    fontSize="medium"
+                    sx={{ color: "#1565C0" }}
+                  />
+                  <Typography variant="h7">Testimonial</Typography>
+                </Grid>
+              }
+              value="8"
+              style={value === "8" ? activeLabelStyle : labelStyle}
+            />
           </Tabs>
         </Grid>
       </Grid>

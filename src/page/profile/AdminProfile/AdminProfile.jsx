@@ -25,6 +25,7 @@ import Registation from "../../Registation/Registation";
 import { useGetLoggedInUserDetail } from "../../../hooks/auth/useAuth";
 import ReuseSideProfile from "./ReuseSideProfile";
 import AdminTeam from "../../team/AdminTeamView.jsx/AdminTeam";
+import AdminTestimonial from "../../testimonial/AdminTestimonial";
 
 const menuItems = [
   { label: "Students", component: <Student /> },
@@ -113,6 +114,7 @@ const AdminProfile = ({ data: loggedinUserData }) => {
                 backgroundColor: "#fff",
                 borderRadius: ".5rem",
                 padding: "1rem",
+                height: "100%",
               }}
             >
               {item.component}
@@ -125,6 +127,7 @@ const AdminProfile = ({ data: loggedinUserData }) => {
               backgroundColor: "#fff",
               borderRadius: ".5rem",
               padding: "1rem",
+              height: "100%",
             }}
           >
             <Registation />
@@ -136,9 +139,22 @@ const AdminProfile = ({ data: loggedinUserData }) => {
               backgroundColor: "#fff",
               borderRadius: ".5rem",
               padding: "1rem",
+              height: "100%",
             }}
           >
             <AdminTeam />
+          </Box>
+        </TabPanel>
+        <TabPanel sx={{ p: 0 }} value="8">
+          <Box
+            sx={{
+              backgroundColor: "#fff",
+              borderRadius: ".5rem",
+              padding: "1rem",
+              height: "100%",
+            }}
+          >
+            <AdminTestimonial />
           </Box>
         </TabPanel>
       </TabContext>

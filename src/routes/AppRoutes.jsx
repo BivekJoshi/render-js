@@ -19,10 +19,10 @@ import ResetPassword from "../page/auth/ResetPassword";
 import Team from "../page/team/Team";
 import StudentProfile from "../page/profile/StudentProfile.jsx/StudentProfile";
 import { useGetLoggedInUserDetail } from "../hooks/auth/useAuth";
+import ChangePassword from "../page/auth/ChangePassword";
 
 const AppRoutes = () => {
   const { data } = useGetLoggedInUserDetail();
-  // console.log(data?.data,"data masxiansjxnjasnxinasxn");
   return (
     <HashRouter hashType="slash">
       <Routes>
@@ -31,6 +31,10 @@ const AppRoutes = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/authRegister" element={<AuthRegistation />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route
+            path="/change-password"
+            element={<ChangePassword data={data?.data} />}
+          />
           <Route path="/ric/reset-password" element={<ResetPassword />} />
           <Route path="/applyNow" element={<ApplyNow />} />
           <Route path="/home" element={<Home />} />

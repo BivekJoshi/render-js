@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
+  changePassword,
   forgotPassword,
   getLoggedinUserDetail,
   login,
@@ -58,6 +59,24 @@ export const useForgetPassword = ({ onSuccess }) => {
     {
       onSuccess: (data) => {
         toast.success("Your password is resetted please check your mail");
+        navigate("/login");
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(err);
+      },
+    }
+  );
+};
+
+/*________________________CHANGE PASSWORD_____________________________________*/
+export const useChangePassword = ({ onSuccess }) => {
+  const navigate = useNavigate();
+  return useMutation(
+    ["changePassword"],
+    (formData) => changePassword(formData),
+    {
+      onSuccess: (data) => {
+        toast.success("Your password is changed successfully");
         navigate("/login");
       },
       onError: (err, _variables, _context) => {

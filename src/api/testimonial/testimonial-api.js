@@ -5,3 +5,9 @@ export const addTestimonial = async (formData) => {
   const data = await axiosInstance.post("/v1/testimonial/save", formData);
   return data;
 };
+
+/*_____________________________GET TESTIMONIAL_______________________________________________ */
+export const getTestimonial = async () => {
+  const data = await axiosInstance.get("/v1/testimonial/find");
+  return data?.data?.data;
+};
