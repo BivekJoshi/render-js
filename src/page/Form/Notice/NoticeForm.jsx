@@ -5,12 +5,13 @@ import toast from "react-hot-toast";
 import BlankImage from "../../../assets/BlankImage.jpg";
 import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 import RemarkField from "../../../components/form/RemarkField";
+import { DOC_URL } from "../../../api/axiosInterceptor";
 
-const NoticeForm = ({ userInfoData }) => {
+const NoticeForm = ({ data }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const { formik } = useNoticeForm({
-    selectedProfile,
+    selectedProfile,data
   });
 
   const handleChangeImage = (e) => {
@@ -27,7 +28,7 @@ const NoticeForm = ({ userInfoData }) => {
     }
   };
   const handleSubmit = () => {
-    if (selectedProfile) {
+    if (selectedProfile || data) {
       formik.submitForm();
     } else {
       toast.error("Please select image first");
@@ -54,15 +55,13 @@ const NoticeForm = ({ userInfoData }) => {
       <Grid item xs={5}>
         <Box>
           {!imagePreview ? (
-            userInfoData?.imageFilePath ? (
-              // <img
-              //   src={`${DOC_URL}${userInfoData?.imageFilePath}`}
-              //   alt="Profile"
-              //   height="auto"
-              //   width="200px"
-              //   style={{ borderRadius: "20%" }}
-              // />
-              <div>image</div>
+            data ? (
+              <img
+                src={DOC_URL + data?.imagePath}
+                alt="Profile"
+                height="200px"
+                width="180px"
+              />
             ) : (
               <div style={{ height:"200px"}}>
                 <img

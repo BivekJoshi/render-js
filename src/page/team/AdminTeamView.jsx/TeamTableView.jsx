@@ -10,7 +10,7 @@ const TeamTableView = (staffData) => {
       {
         id: 1,
         accessorKey: "user.fullName",
-        header: "Student",
+        header: "Member Name",
         size: 250,
         sortable: false,
         Cell: ({ row }) => (
@@ -69,7 +69,7 @@ const TeamTableView = (staffData) => {
   return (
     <>
       <CustomTable
-        title="Students"
+        title="Team"
         columns={columns}
         data={staffData?.staffData?.data}
         // state={{

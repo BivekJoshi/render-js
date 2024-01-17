@@ -9,9 +9,19 @@ import { DOC_URL } from "../../api/axiosInterceptor";
 const Notice = () => {
   const { data, isLoading } = useGetNotice();
   const [openNotice, setOpenNotice] = useState(false);
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [rowData, setRowData] = useState();
 
   const handleButtonClick = () => {
     setOpenNotice(true);
+  };
+
+  const handleModalEditClose = () => {
+    setIsModalEditOpen(false);
+  };
+  const editRow = (row) => {
+    setIsModalEditOpen(true);
+    setRowData(row?.original);
   };
 
   const columns = useMemo(
@@ -118,6 +128,10 @@ const Notice = () => {
         // handleNotification={notificationRoute}
         // delete
         // notification
+        enableEditing={true}
+        enableEdit
+        edit
+        handleEdit={editRow}
       />
 
       {openNotice && (
@@ -128,6 +142,16 @@ const Notice = () => {
           formComponent={<NoticeForm onClose={() => setOpenNotice(false)} />}
         />
       )}
+      <FormModal
+        open={isModalEditOpen}
+        title="Edit Notice Detail"
+        onClose={handleModalEditClose}
+        formComponent={
+          <>
+            <NoticeForm onClose={() => setOpenNotice(false)} data={rowData} />
+          </>
+        }
+      />
     </>
   );
 };

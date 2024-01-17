@@ -3,6 +3,7 @@ import {
   addSiteDetail,
   getSiteDetail,
 } from "../../api/siteDetail/siteDetail-api";
+import toast from "react-hot-toast";
 
 /*________________________GET SITE DETAIL_____________________________________*/
 export const useGetSiteDetail = () => {
@@ -23,8 +24,8 @@ export const useAddSiteDetail = ({ onSuccess, selectedProfile }) => {
     {
       onSuccess: (data, variables, context) => {
         onSuccess && onSuccess(data, variables, context);
-        toast.success("Added Country Successfully");
-        queryClient.invalidateQueries("useGetCountry");
+        toast.success("Your Site Detail is updated Successfully");
+        queryClient.invalidateQueries("getSiteDetail");
       },
       onError: (err, _variables, _context) => {
         toast.error(err);

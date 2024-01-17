@@ -15,7 +15,9 @@ export const getCountryCode = async () => {
 /*________________________POST COUNTRY_____________________________________*/
 export const addCountry = async (formData, selectedProfile) => {
   const imgData = new FormData();
-  imgData.append("imageFile", selectedProfile);
+  if(selectedProfile){
+    imgData.append("imageFile", selectedProfile);
+  }
 
   Object.keys(formData).forEach((key) => {
     if (key !== "imageFile") {

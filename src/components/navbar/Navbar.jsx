@@ -82,10 +82,12 @@ function Navbar({ data }) {
     handleCloseProfile();
   };
   const handleClickProfile = () => {
-    if (data?.userType !== "STUDENT") {
+    if (data?.userType === "ADMIN") {
       navigate(`/adminProfile`);
-    } else {
+    } else if(data?.userType === "STUDENT"){
       navigate(`/studentProfile`);
+    }else{
+      navigate(`/superAdminProfile`);
     }
 
     handleCloseProfile();

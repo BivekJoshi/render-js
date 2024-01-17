@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useAddImage } from "../useNotice";
+import { useAddImage, useEditImage } from "../useNotice";
 import * as Yup from "yup";
 
 const NoticeSchema = Yup.object().shape({
@@ -9,14 +9,14 @@ const NoticeSchema = Yup.object().shape({
   redirectingUrl: Yup.string().required("Please enter a redirecting url"),
 });
 
-export const useNoticeForm = ({ selectedProfile }) => {
+export const useNoticeForm = ({ selectedProfile, data }) => {
+  const { mutate } = useAddImage({ selectedProfile });
+  const { mutate: editMutate } = useEditImage({ selectedProfile });
 
-  const { mutate } = useAddImage({selectedProfile});
-
-//   const handleAddProfileImage = (value) => {
-//     console.log(value,"value1");
-//     mutate(value, {});
-//   };
+  //   const handleAddProfileImage = (value) => {
+  //     console.log(value,"value1");
+  //     mutate(value, {});
+  //   };
   const handleRequest = (value) => {
     // console.log(...value,"value2");
     value = { ...value };
@@ -26,19 +26,31 @@ export const useNoticeForm = ({ selectedProfile }) => {
       },
     });
   };
+  const handledEditRequest = (value) => {
+    value = { ...value };
+    editMutate(value, {
+      onSuccess: () => {
+        formik.resetForm();
+      },
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
-      title: "",
-      description: "",
-      endDateTime: "",
-      noticeImage: selectedProfile,
-      redirectingUrl: "",
+      title: data?.title || "",
+      description: data?.description || "",
+      endDateTime: data?.endDateTime || "",
+      redirectingUrl: data?.redirectingUrl || "",
+      id: data?.id || "",
     },
     validationSchema: NoticeSchema,
     enableReinitialize: true,
     onSubmit: (value) => {
-    //   handleAddProfileImage(selectedProfile);
-      handleRequest(value);
+      if (data) {
+        handledEditRequest(value);
+      } else {
+        handleRequest(value);
+      }
     },
   });
 
