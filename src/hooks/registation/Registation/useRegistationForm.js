@@ -15,7 +15,7 @@ const RegisterSchema = Yup.object().shape({
   ),
 });
 
-const useRegistationForm = (onClose) => {
+const useRegistationForm = ({onClose}) => {
   const [loading, setLoading] = useState(false);
   const { mutate: addRegistation } = useAddRegistation({});
 
@@ -38,7 +38,7 @@ const useRegistationForm = (onClose) => {
     values = { ...values };
     addRegistation(values, {
       onSuccess: () => {
-        onClose;
+        onClose();
         formik.resetForm();
       },
     });

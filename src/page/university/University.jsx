@@ -129,7 +129,7 @@ const University = () => {
         onClose={handleModalEditClose}
         formComponent={
           <>
-            <UniversityForm onClose={() => setOpenCountry(false)} data={rowData} />
+            <UniversityForm onClose={() => setIsModalEditOpen(false)} data={rowData} />
           </>
         }
       />

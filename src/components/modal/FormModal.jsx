@@ -24,6 +24,8 @@ const FormModal = ({ open, onClose, formComponent, sx, width, title }) => {
     borderRadius: 2,
     boxShadow: 24,
     p: "12px 24px",
+    height: isXsScreen ? "423px" : "cover",
+    overflowY: isXsScreen?"scroll":"hidden",
   };
 
   return (

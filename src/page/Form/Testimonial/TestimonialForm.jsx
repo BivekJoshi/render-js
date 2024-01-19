@@ -5,7 +5,7 @@ import { useGetUniversity } from "../../../hooks/university/useUniversity";
 import RemarkField from "../../../components/form/RemarkField";
 
 const TestimonialForm = ({ onClose }) => {
-  const { formik } = useTestimonialForm(onClose);
+  const { formik } = useTestimonialForm({onClose});
   const { data: universityData, isLoading } = useGetUniversity();
 
   const handleFormSubmit = () => {
@@ -62,6 +62,7 @@ const TestimonialForm = ({ onClose }) => {
           helperText={formik.touched.scholarship && formik.errors.scholarship}
           variant="outlined"
           size="small"
+          autoComplete="off"
         />
       </Grid>
       <Grid item xs={12} md={12}>

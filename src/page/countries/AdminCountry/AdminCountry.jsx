@@ -136,10 +136,11 @@ const AdminCountry = () => {
       )}
       <FormModal
         open={isModalEditOpen}
+        title="Edit Country Detail"
         onClose={handleModalEditClose}
         formComponent={
           <>
-            <CountryForm onClose={() => setOpenCountry(false)} data={rowData} />
+            <CountryForm onClose={() => setIsModalEditOpen(false)} data={rowData} />
           </>
         }
       />

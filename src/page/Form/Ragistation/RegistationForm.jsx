@@ -4,7 +4,7 @@ import useRegistationForm from "../../../hooks/registation/Registation/useregist
 import { useGetCountryCode } from "../../../hooks/country/useCountry";
 
 const RegistationForm = ({onClose}) => {
-  const { formik } = useRegistationForm(onClose);
+  const { formik } = useRegistationForm({onClose});
   const { data: countryData, isLoading } = useGetCountryCode();
 
   const handleFormSubmit = () => {

@@ -9,7 +9,7 @@ const NoticeSchema = Yup.object().shape({
   redirectingUrl: Yup.string().required("Please enter a redirecting url"),
 });
 
-export const useNoticeForm = ({ selectedProfile, data }) => {
+export const useNoticeForm = ({ selectedProfile, data, onClose }) => {
   const { mutate } = useAddImage({ selectedProfile });
   const { mutate: editMutate } = useEditImage({ selectedProfile });
 
@@ -23,6 +23,7 @@ export const useNoticeForm = ({ selectedProfile, data }) => {
     mutate(value, {
       onSuccess: () => {
         formik.resetForm();
+        onClose();
       },
     });
   };
@@ -31,6 +32,7 @@ export const useNoticeForm = ({ selectedProfile, data }) => {
     editMutate(value, {
       onSuccess: () => {
         formik.resetForm();
+        onClose();
       },
     });
   };

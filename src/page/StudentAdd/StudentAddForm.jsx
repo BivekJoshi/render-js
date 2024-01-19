@@ -87,7 +87,7 @@ const StudentAddForm = ({ onClose, data }) => {
         borderRadius: "8px",
       }}
     >
-      <Grid item xs={4}>
+      <Grid item xs={12} sm={12} md={4}>
         <Box>
           {!imagePreview ? (
             data ? (
@@ -137,15 +137,15 @@ const StudentAddForm = ({ onClose, data }) => {
             sx={{ textTransform: "none" }}
             fullWidth
           >
-            Students Photo
+            {data?"Change Photo":"Students Photo"}
             <VisuallyHiddenInput type="file" />
           </Button>
         </Box>
       </Grid>
 
-      <Grid item xs={8}>
+      <Grid item xs={12} sm={12} md={8}>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={12} md={12}>
             <TextField
               id="fullName"
               name="fullName"
@@ -161,7 +161,7 @@ const StudentAddForm = ({ onClose, data }) => {
               size="small"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
               id="gender"
               name="gender"
@@ -185,7 +185,7 @@ const StudentAddForm = ({ onClose, data }) => {
               ))}
             </TextField>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
               name="dateOfBirth"
               label="Date of Birth"
@@ -205,7 +205,7 @@ const StudentAddForm = ({ onClose, data }) => {
               size="small"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
               id="address"
               name="address"
@@ -221,7 +221,7 @@ const StudentAddForm = ({ onClose, data }) => {
               size="small"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
               id="email"
               name="email"
@@ -241,7 +241,7 @@ const StudentAddForm = ({ onClose, data }) => {
       </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
               id="mobileNumber"
               name="mobileNumber"
@@ -262,7 +262,7 @@ const StudentAddForm = ({ onClose, data }) => {
               size="small"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
               id="nationality"
               name="nationality"
@@ -282,7 +282,7 @@ const StudentAddForm = ({ onClose, data }) => {
               size="small"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
               id="maritalStatus"
               name="maritalStatus"
@@ -311,7 +311,7 @@ const StudentAddForm = ({ onClose, data }) => {
               ))}
             </TextField>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <Autocomplete
               id="appliedCountryCode"
               name="appliedCountryCode"
@@ -350,7 +350,7 @@ const StudentAddForm = ({ onClose, data }) => {
               )}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
               id="idType"
               name="idType"
@@ -374,7 +374,7 @@ const StudentAddForm = ({ onClose, data }) => {
               ))}
             </TextField>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
               id="idNumber"
               name="idNumber"

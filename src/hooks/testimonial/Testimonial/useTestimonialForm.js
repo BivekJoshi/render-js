@@ -10,7 +10,7 @@ const TesimonialSchema = Yup.object().shape({
     visaDate: Yup.string().required("Please select visa date"),
 });
 
-const useTestimonialForm = (onClose) => {
+const useTestimonialForm = ({onClose}) => {
   const [loading, setLoading] = useState(false);
   const { mutate: addTestimonial } = useAddTestimonial({});
 
@@ -33,7 +33,7 @@ const useTestimonialForm = (onClose) => {
     values = { ...values };
     addTestimonial(values, {
       onSuccess: () => {
-        onClose;
+        onClose();
         formik.resetForm();
       },
     });

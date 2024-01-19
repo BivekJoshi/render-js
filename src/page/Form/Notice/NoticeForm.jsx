@@ -7,12 +7,13 @@ import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 import RemarkField from "../../../components/form/RemarkField";
 import { DOC_URL } from "../../../api/axiosInterceptor";
 
-const NoticeForm = ({ data }) => {
+const NoticeForm = ({ data, onClose }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const { formik } = useNoticeForm({
     selectedProfile,
     data,
+    onClose
   });
 
   const handleChangeImage = (e) => {
@@ -53,7 +54,7 @@ const NoticeForm = ({ data }) => {
           // InputLabelProps={{ shrink: Boolen(formik.values.title) }}
         />
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs={12} sm={12} md={5}>
         <Box>
           {!imagePreview ? (
             data ? (
@@ -113,7 +114,7 @@ const NoticeForm = ({ data }) => {
         </Box>
       </Grid>
 
-      <Grid item xs={7}>
+      <Grid item xs={12} sm={12} md={7}>
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <TextField
             id="endDateTime"
@@ -185,6 +186,7 @@ const NoticeForm = ({ data }) => {
           <Button
             variant="contained"
             color="error"
+            onClick={onClose}
             sx={{
               mt: 3,
               ml: 1,

@@ -5,6 +5,7 @@ import {
   useEditCountryImg,
 } from "../useCountry";
 import * as Yup from "yup";
+import { useState } from "react";
 
 const CountrySchema = Yup.object().shape({
   countryCode: Yup.string().required("Please enter country code"),
@@ -12,7 +13,8 @@ const CountrySchema = Yup.object().shape({
   countryName: Yup.string().required("Please enter country name"),
 });
 
-export const useCountryForm = ({ selectedProfile, data }) => {
+export const useCountryForm = ({ selectedProfile, data, onClose }) => {
+  const [loading, setLoading] = useState(false);
   const { mutate } = useAddCountry({ selectedProfile });
   const { mutate: editMutate } = useEditCountry({ selectedProfile });
   const { mutate: editImgMutate } = useEditCountryImg({ selectedProfile });
@@ -22,6 +24,7 @@ export const useCountryForm = ({ selectedProfile, data }) => {
     mutate(value, {
       onSuccess: () => {
         formik.resetForm();
+        onClose();
       },
     });
   };
@@ -30,6 +33,7 @@ export const useCountryForm = ({ selectedProfile, data }) => {
     editMutate(value, {
       onSuccess: () => {
         formik.resetForm();
+        onClose();
       },
     });
   };
@@ -52,7 +56,7 @@ export const useCountryForm = ({ selectedProfile, data }) => {
     validationSchema: CountrySchema,
     enableReinitialize: true,
     onSubmit: (value) => {
-      // handleRequest(value);
+      setLoading(true);
       if (data) {
         handledEditRequest(value);
         handledEditImgRequest(value);
@@ -64,6 +68,7 @@ export const useCountryForm = ({ selectedProfile, data }) => {
 
   return {
     formik,
+    loading,
   };
 };
 

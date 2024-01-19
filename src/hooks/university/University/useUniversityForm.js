@@ -1,6 +1,11 @@
 import { useFormik } from "formik";
-import { useAddUniversity, useAddUniversityImage, useEditUniversity } from "../useUniversity";
+import {
+  useAddUniversity,
+  useAddUniversityImage,
+  useEditUniversity,
+} from "../useUniversity";
 import * as Yup from "yup";
+import { useState } from "react";
 
 const UniversitySchema = Yup.object().shape({
   name: Yup.string().required("Please enter university name"),
@@ -10,17 +15,18 @@ const UniversitySchema = Yup.object().shape({
   url: Yup.string().required("Please enter redirecting url"),
 });
 
-export const useUniversityForm = ({ selectedProfile, data }) => {
+export const useUniversityForm = ({ selectedProfile, data, onClose }) => {
+  const [loading, setLoading] = useState(false);
   const { mutate } = useAddUniversity({ selectedProfile });
   const { mutate: editMutate } = useEditUniversity({ selectedProfile });
   const { mutate: editImgMutate } = useAddUniversityImage({ selectedProfile });
-
 
   const handleRequest = (value) => {
     value = { ...value };
     mutate(value, {
       onSuccess: () => {
         formik.resetForm();
+        onClose();
       },
     });
   };
@@ -29,6 +35,7 @@ export const useUniversityForm = ({ selectedProfile, data }) => {
     editMutate(value, {
       onSuccess: () => {
         formik.resetForm();
+        onClose();
       },
     });
   };
@@ -37,6 +44,7 @@ export const useUniversityForm = ({ selectedProfile, data }) => {
     editImgMutate(value, {
       onSuccess: () => {
         formik.resetForm();
+        onClose();
       },
     });
   };
@@ -45,12 +53,13 @@ export const useUniversityForm = ({ selectedProfile, data }) => {
       name: data?.name || "",
       countryCode: data?.country?.countryCode || "",
       url: data?.url || "",
-      universityLogo: selectedProfile,
+      // universityLogo: selectedProfile,
       id: data?.id || "",
     },
     validationSchema: UniversitySchema,
     enableReinitialize: true,
     onSubmit: (value) => {
+      setLoading(true);
       if (data) {
         handledEditRequest(value);
         // handledEditImgRequest(value);
@@ -60,7 +69,7 @@ export const useUniversityForm = ({ selectedProfile, data }) => {
     },
   });
 
-  return { formik };
+  return { formik, loading };
 };
 
 export default useUniversityForm;

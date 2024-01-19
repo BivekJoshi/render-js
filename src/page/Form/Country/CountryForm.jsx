@@ -6,13 +6,15 @@ import BlankImage from "../../../assets/BlankImage.jpg";
 import RemarkField from "../../../components/form/RemarkField";
 import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 import { DOC_URL } from "../../../api/axiosInterceptor";
+import { LoadingButton } from "@mui/lab";
 
-const CountryForm = ({ userInfoData ,data}) => {
-
+const CountryForm = ({ data, onClose }) => {
   const [selectedProfile, setSelectedProfile] = useState({});
   const [imagePreview, setImagePreview] = useState(null);
-  const { formik } = useCountryForm({
-    selectedProfile,data
+  const { formik, loading } = useCountryForm({
+    selectedProfile,
+    data,
+    onClose,
   });
 
   const handleChangeImage = (e) => {
@@ -36,19 +38,11 @@ const CountryForm = ({ userInfoData ,data}) => {
     }
   };
   return (
-    <Grid
-      container
-      spacing={3}
-      margin="0"
-      justifyContent="center"
-      width="100%"
-    >
-      <Grid item xs={5}>
+    <Grid container spacing={3} margin="0" justifyContent="center" width="100%">
+      <Grid item xs={12} sm={12} md={5}>
         <Box>
-
           {!imagePreview ? (
             data ? (
-
               <img
                 src={DOC_URL + data?.imagePath}
                 alt="Profile"
@@ -104,7 +98,7 @@ const CountryForm = ({ userInfoData ,data}) => {
         </Box>
       </Grid>
 
-      <Grid item xs={7}>
+      <Grid item xs={12} sm={12} md={7}>
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <TextField
             id="countryName"
@@ -156,7 +150,8 @@ const CountryForm = ({ userInfoData ,data}) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button
+          <LoadingButton
+            loading={loading}
             variant="contained"
             onClick={handleSubmit}
             sx={{
@@ -166,10 +161,11 @@ const CountryForm = ({ userInfoData ,data}) => {
             }}
           >
             Upload
-          </Button>
+          </LoadingButton>
           <Button
             variant="contained"
             color="error"
+            onClick={onClose}
             sx={{
               mt: 3,
               ml: 1,

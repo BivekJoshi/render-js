@@ -148,7 +148,7 @@ const Notice = () => {
         onClose={handleModalEditClose}
         formComponent={
           <>
-            <NoticeForm onClose={() => setOpenNotice(false)} data={rowData} />
+            <NoticeForm onClose={() => setIsModalEditOpen(false)} data={rowData} />
           </>
         }
       />

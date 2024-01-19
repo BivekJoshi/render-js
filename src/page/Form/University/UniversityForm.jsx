@@ -10,15 +10,17 @@ import {
 import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 import RemarkField from "../../../components/form/RemarkField";
 import { DOC_URL } from "../../../api/axiosInterceptor";
+import { LoadingButton } from "@mui/lab";
 
-const UniversityForm = ({ data }) => {
+const UniversityForm = ({ data, onClose }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const { data: countryData, isLoading } = useGetCountryCode();
 
-  const { formik } = useUniversityForm({
+  const { formik, loading } = useUniversityForm({
     selectedProfile,
     data,
+    onClose
   });
 
   const handleChangeImage = (e) => {
@@ -44,14 +46,14 @@ const UniversityForm = ({ data }) => {
 
   return (
     <Grid container spacing={3} margin="0" justifyContent="center" width="100%">
-      <Grid item xs={5}>
+      <Grid item xs={12} sm={12} md={5}>
         <Box>
           {!imagePreview ? (
             data ? (
               <img
                 src={DOC_URL + data?.logoPath}
                 alt="Profile"
-                height="200px"
+                height="160px"
                 width="180px"
               />
             ) : (
@@ -103,7 +105,7 @@ const UniversityForm = ({ data }) => {
         </Box>
       </Grid>
 
-      <Grid item xs={7}>
+      <Grid item xs={12} sm={12} md={7}>
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <TextField
             id="name"
@@ -171,7 +173,8 @@ const UniversityForm = ({ data }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button
+          <LoadingButton
+            loading={loading}
             variant="contained"
             onClick={handleSubmit}
             sx={{
@@ -181,10 +184,11 @@ const UniversityForm = ({ data }) => {
             }}
           >
             Upload
-          </Button>
+          </LoadingButton>
           <Button
             variant="contained"
             color="error"
+            onClick={onClose}
             sx={{
               mt: 3,
               ml: 1,
