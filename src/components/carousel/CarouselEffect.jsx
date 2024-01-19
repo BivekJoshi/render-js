@@ -3,7 +3,7 @@ import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MobileStepper from "@mui/material/MobileStepper";
 import Home1 from "../../assets/Home1.png";
-import Home2 from "../../assets/home2.png";
+import Home2 from "../../assets/Home2.png";
 import Home3 from "../../assets/Home3.png";
 import './main.css'
 
@@ -14,11 +14,11 @@ const images = [
   },
   {
     label: "San Francisco – Oakland Bay Bridge, United States",
-    imgPath: Home2,
+    imgPath: Home3,
   },
   {
     label: "San Francisco – Oakland Bay Bridge, United States",
-    imgPath: Home3,
+    imgPath: Home2,
   },
 ];
 

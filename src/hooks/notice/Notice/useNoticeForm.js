@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { useAddImage, useEditImage } from "../useNotice";
 import * as Yup from "yup";
+import { useState } from "react";
 
 const NoticeSchema = Yup.object().shape({
   title: Yup.string().required("Please enter notice title"),
@@ -11,6 +12,7 @@ const NoticeSchema = Yup.object().shape({
 
 export const useNoticeForm = ({ selectedProfile, data, onClose }) => {
   const { mutate } = useAddImage({ selectedProfile });
+  const [loading, setLoading] = useState(false);
   const { mutate: editMutate } = useEditImage({ selectedProfile });
 
   //   const handleAddProfileImage = (value) => {
@@ -48,6 +50,7 @@ export const useNoticeForm = ({ selectedProfile, data, onClose }) => {
     validationSchema: NoticeSchema,
     enableReinitialize: true,
     onSubmit: (value) => {
+      setLoading(true);
       if (data) {
         handledEditRequest(value);
       } else {
@@ -58,6 +61,7 @@ export const useNoticeForm = ({ selectedProfile, data, onClose }) => {
 
   return {
     formik,
+    loading,
   };
 };
 

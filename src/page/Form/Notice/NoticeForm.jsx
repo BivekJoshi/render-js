@@ -6,14 +6,15 @@ import BlankImage from "../../../assets/BlankImage.jpg";
 import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 import RemarkField from "../../../components/form/RemarkField";
 import { DOC_URL } from "../../../api/axiosInterceptor";
+import { LoadingButton } from "@mui/lab";
 
 const NoticeForm = ({ data, onClose }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
-  const { formik } = useNoticeForm({
+  const { formik, loading } = useNoticeForm({
     selectedProfile,
     data,
-    onClose
+    onClose,
   });
 
   const handleChangeImage = (e) => {
@@ -172,7 +173,8 @@ const NoticeForm = ({ data, onClose }) => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button
+          <LoadingButton
+            loading={loading}
             variant="contained"
             onClick={handleSubmit}
             sx={{
@@ -182,7 +184,7 @@ const NoticeForm = ({ data, onClose }) => {
             }}
           >
             Upload
-          </Button>
+          </LoadingButton>
           <Button
             variant="contained"
             color="error"

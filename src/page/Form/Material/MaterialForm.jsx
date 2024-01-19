@@ -15,6 +15,7 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import useMaterialForm from "../../../hooks/material/Material/useMaterialForm";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { LoadingButton } from "@mui/lab";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -28,7 +29,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const MaterialForm = () => {
+const MaterialForm = ({ data, onClose }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [selectedSymbol, setSelectedSymbol] = useState();
 
@@ -38,8 +39,10 @@ const MaterialForm = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const { data: countryData, isLoading } = useGetCountryCode();
 
-  const { formik } = useMaterialForm({
+  const { formik, loading } = useMaterialForm({
     selectedProfile,
+    data,
+    onClose,
   });
 
   const handleChangeImage = (e) => {
@@ -57,7 +60,7 @@ const MaterialForm = () => {
   };
 
   const handleSubmit = () => {
-    if (selectedProfile) {
+    if (selectedProfile || data) {
       formik.submitForm();
     } else {
       toast.error("Please select image first");
@@ -69,7 +72,6 @@ const MaterialForm = () => {
       container
       spacing={3}
       margin="0"
-      justifyContent="center"
       width="100%"
       padding="1rem"
       sx={{
@@ -77,7 +79,7 @@ const MaterialForm = () => {
         borderRadius: "8px",
       }}
     >
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <TextField
             id="name"
@@ -148,7 +150,7 @@ const MaterialForm = () => {
               variant="contained"
               startIcon={<CloudUploadIcon />}
               onChange={handleChangeImage}
-              sx={{textTransform:'none'}}
+              sx={{ textTransform: "none" }}
               fullWidth
             >
               Upload file
@@ -162,7 +164,8 @@ const MaterialForm = () => {
           justifyContent="flex-end"
           alignItems="flex-end"
         >
-          <Button
+          <LoadingButton
+            loading={loading}
             variant="contained"
             onClick={handleSubmit}
             sx={{
@@ -172,6 +175,18 @@ const MaterialForm = () => {
             }}
           >
             Upload
+          </LoadingButton>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={onClose}
+            sx={{
+              mt: 3,
+              ml: 1,
+              textTransform: "none",
+            }}
+          >
+            Close
           </Button>
         </Grid>
       </Grid>

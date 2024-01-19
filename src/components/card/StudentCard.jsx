@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Email, LocalPhone } from "@mui/icons-material";
-import { Box, Button, Card, CardMedia, Grid, Tooltip } from "@mui/material";
+import {
+  Badge,
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  Grid,
+  Tooltip,
+} from "@mui/material";
 import { Chip, ClickAwayListener, Grow, Stack } from "@mui/material";
 import { MenuItem, MenuList, Paper, Popper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -96,19 +104,7 @@ const StudentCard = ({ name, mobileNumber, email, userType, imageUrl }) => {
             <Box padding={"0 1rem"}>
               <Typography variant="body2" gutterBottom>
                 <Tooltip title="helo">
-                  <Chip
-                    style={{ width: 230 }}
-                    label={
-                      <p
-                        style={{
-                          textOverflow: "ellipsis",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {userType}
-                      </p>
-                    }
-                  />
+                  <Badge color="success" badgeContent={userType} />
                 </Tooltip>
               </Typography>
             </Box>
