@@ -33,7 +33,7 @@ const StudentCard = ({ name, mobileNumber, email, userType, imageUrl }) => {
               justifyContent="flex-end"
               alignItems="center"
             >
-              <Button
+              {/* <Button
                 variant="outlined"
                 sx={{
                   marginTop: "5px",
@@ -47,7 +47,7 @@ const StudentCard = ({ name, mobileNumber, email, userType, imageUrl }) => {
                 //   }}
               >
                 Edit
-              </Button>
+              </Button> */}
             </Grid>
           </Box>
 

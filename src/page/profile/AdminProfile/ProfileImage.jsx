@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import LocalSeeIcon from "@mui/icons-material/LocalSee";
 import { DOC_URL } from "../../../api/axiosInterceptor";
-import ProfileImage1 from "../../../assets/AboutUs1.png";
+import ProfileImage1 from "../../../assets/RenderLogo.png";
 
 const ProfileImage = ({ loggedinUserData }) => {
   return (

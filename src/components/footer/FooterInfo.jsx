@@ -36,7 +36,7 @@ const FooterInfo = () => {
         color: "#fff",
         padding: "3rem 4rem",
         bottom: 0,
-        // width:"cover"
+        // width:"100%"
       }}
     >
       <Grid container spacing={3}>

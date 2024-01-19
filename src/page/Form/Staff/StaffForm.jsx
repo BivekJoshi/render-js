@@ -5,6 +5,8 @@ import BlankImage from "../../../assets/Person.png";
 import { VisuallyHiddenInput } from "../../../components/form/UploadButton";
 import { useStaffForm } from "../../../hooks/staff/Staff/useStaffForm";
 import { genderOptions } from "../../../components/optionDropDowm/Option";
+import { LoadingButton } from "@mui/lab";
+import { DOC_URL } from "../../../api/axiosInterceptor";
 
 const currentDate = new Date();
 const minAge = new Date(
@@ -15,12 +17,14 @@ const minAge = new Date(
   .toISOString()
   .split("T")[0];
 
-const StaffForm = ({ userInfoData }) => {
+const StaffForm = ({ onClose, data }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
 
-  const { formik } = useStaffForm({
+  const { formik, loading } = useStaffForm({
     selectedProfile,
+    onClose,
+    data,
   });
 
   const handleChangeImage = (e) => {
@@ -37,7 +41,7 @@ const StaffForm = ({ userInfoData }) => {
     }
   };
   const handleSubmit = () => {
-    if (selectedProfile) {
+    if (selectedProfile || data) {
       formik.submitForm();
     } else {
       toast.error("Please select image first");
@@ -60,8 +64,13 @@ const StaffForm = ({ userInfoData }) => {
       <Grid item xs={4}>
         <Box>
           {!imagePreview ? (
-            userInfoData?.imageFilePath ? (
-              <div>image</div>
+            data ? (
+              <img
+                src={DOC_URL + data?.user?.imageUrl}
+                alt="Profile"
+                height="100px"
+                width="120px"
+              />
             ) : (
               <div
                 style={{
@@ -248,8 +257,10 @@ const StaffForm = ({ userInfoData }) => {
             direction="row"
             justifyContent="flex-end"
             alignItems="flex-end"
+            gap="1rem"
           >
-            <Button
+            <LoadingButton
+              loading={loading}
               variant="contained"
               onClick={handleSubmit}
               sx={{
@@ -259,6 +270,14 @@ const StaffForm = ({ userInfoData }) => {
               }}
             >
               Upload
+            </LoadingButton>
+            <Button
+              variant="contained"
+              onClick={onClose}
+              color="error"
+              sx={{ textTransform: "none" }}
+            >
+              Close
             </Button>
           </Grid>
         </Grid>

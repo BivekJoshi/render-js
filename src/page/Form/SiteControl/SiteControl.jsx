@@ -140,7 +140,7 @@ const SiteControl = () => {
         </Grid>
         <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
           <Box sx={{ width: "20%" }}>
-            <div style={{ width: "200px", height: "180px" }}>
+            <div style={{ width: "180px", height: "180px" }}>
               <img
                 src={Img1}
                 alt="AboutUs!"
@@ -268,7 +268,7 @@ const SiteControl = () => {
                 />
               </Box>
               <Box sx={{ width: "20%" }}>
-                <div style={{ width: "200px", height: "180px" }}>
+                <div style={{ width: "180px", height: "180px" }}>
                   <img
                     src={Img1}
                     alt="AboutUs!"
@@ -308,7 +308,7 @@ const SiteControl = () => {
           <>
             <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
             <Box sx={{ width: "20%" }}>
-            <div style={{ width: "200px", height: "180px" }}>
+            <div style={{ width: "180px", height: "180px" }}>
               <img
                 src={Img1}
                 alt="AboutUs!"

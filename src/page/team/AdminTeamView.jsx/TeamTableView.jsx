@@ -3,8 +3,20 @@ import CustomTable from "../../../components/customtable/CustomTable";
 import { Avatar, Typography } from "@mui/material";
 import { DOC_URL } from "../../../api/axiosInterceptor";
 import { Link } from "react-router-dom";
+import FormModal from "../../../components/modal/FormModal";
+import StaffForm from "../../Form/Staff/StaffForm";
 
 const TeamTableView = (staffData) => {
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [rowData, setRowData] = useState();
+
+  const handleModalEditClose = () => {
+    setIsModalEditOpen(false);
+  };
+  const editRow = (row) => {
+    setIsModalEditOpen(true);
+    setRowData(row?.original);
+  };
   const columns = useMemo(
     () => [
       {
@@ -87,6 +99,22 @@ const TeamTableView = (staffData) => {
         // handleNotification={notificationRoute}
         // delete
         // notification
+        enableEditing={true}
+        enableEdit
+        edit
+        handleEdit={editRow}
+      />
+      <FormModal
+        open={isModalEditOpen}
+        onClose={handleModalEditClose}
+        formComponent={
+          <>
+            <StaffForm
+              onClose={() => setIsModalEditOpen(false)}
+              data={rowData}
+            />
+          </>
+        }
       />
     </>
   );

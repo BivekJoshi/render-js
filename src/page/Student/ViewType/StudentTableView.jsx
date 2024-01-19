@@ -2,9 +2,20 @@ import React, { useMemo, useState } from "react";
 import CustomTable from "../../../components/customtable/CustomTable";
 import { Avatar, Typography } from "@mui/material";
 import { DOC_URL } from "../../../api/axiosInterceptor";
+import FormModal from "../../../components/modal/FormModal";
+import StudentAddForm from "../../StudentAdd/StudentAddForm";
 
 const StudentTableView = (studentData) => {
-  // console.log(studentData?.studentData?.data?.data.user, "studentData");
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [rowData, setRowData] = useState();
+
+  const handleModalEditClose = () => {
+    setIsModalEditOpen(false);
+  };
+  const editRow = (row) => {
+    setIsModalEditOpen(true);
+    setRowData(row?.original);
+  };
 
   const columns = useMemo(
     () => [
@@ -85,6 +96,23 @@ const StudentTableView = (studentData) => {
         // handleNotification={notificationRoute}
         // delete
         // notification
+        enableEditing={true}
+        enableEdit
+        edit
+        handleEdit={editRow}
+      />
+
+      <FormModal
+        open={isModalEditOpen}
+        onClose={handleModalEditClose}
+        formComponent={
+          <>
+            <StudentAddForm
+              onClose={() => setIsModalEditOpen(false)}
+              data={rowData}
+            />
+          </>
+        }
       />
     </>
   );

@@ -18,6 +18,8 @@ import {
   userTypeOptions,
 } from "../../components/optionDropDowm/Option";
 import { useGetCountryCode } from "../../hooks/country/useCountry";
+import { LoadingButton } from "@mui/lab";
+import { DOC_URL } from "../../api/axiosInterceptor";
 
 const currentDate = new Date();
 const minAge = new Date(
@@ -40,13 +42,15 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const StudentAddForm = ({ userInfoData }) => {
+const StudentAddForm = ({ onClose, data }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const { data: countryData, isLoading } = useGetCountryCode();
 
-  const { formik } = useStudentForm({
+  const { formik, loading } = useStudentForm({
     selectedProfile,
+    onClose,
+    data,
   });
 
   const handleChangeImage = (e) => {
@@ -63,7 +67,7 @@ const StudentAddForm = ({ userInfoData }) => {
     }
   };
   const handleSubmit = () => {
-    if (selectedProfile) {
+    if (selectedProfile || data) {
       formik.submitForm();
     } else {
       toast.error("Please select image first");
@@ -86,8 +90,13 @@ const StudentAddForm = ({ userInfoData }) => {
       <Grid item xs={4}>
         <Box>
           {!imagePreview ? (
-            userInfoData?.imageFilePath ? (
-              <div>image</div>
+            data ? (
+              <img
+                src={DOC_URL + data?.user?.imageUrl}
+                alt="Profile"
+                height="100px"
+                width="120px"
+              />
             ) : (
               <div
                 style={{
@@ -386,8 +395,10 @@ const StudentAddForm = ({ userInfoData }) => {
             direction="row"
             justifyContent="flex-end"
             alignItems="flex-end"
+            gap="1rem"
           >
-            <Button
+            <LoadingButton
+              loading={loading}
               variant="contained"
               onClick={handleSubmit}
               sx={{
@@ -397,6 +408,14 @@ const StudentAddForm = ({ userInfoData }) => {
               }}
             >
               Upload
+            </LoadingButton>
+            <Button
+              variant="contained"
+              onClick={onClose}
+              color="error"
+              sx={{ textTransform: "none" }}
+            >
+              Close
             </Button>
           </Grid>
         </Grid>

@@ -30,3 +30,30 @@ export const addStudent = async (formData, selectedProfile) => {
     throw error;
   }
 };
+
+/*________________________Edit_____________________________________*/
+export const editStudent = async (formData, selectedProfile) => {
+  const imgData = new FormData();
+  if(selectedProfile){
+    imgData.append("profilePicture", selectedProfile);
+  }
+
+  Object.keys(formData).forEach((key) => {
+    if (key !== "profilePicture") {
+      imgData.append(key, formData[key]);
+    }
+  });
+
+  try {
+    const response = await axiosInstance.put(`v1/student/save`, imgData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error adding notice:", error);
+    throw error;
+  }
+};

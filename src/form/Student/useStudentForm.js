@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
-import { useAddStudent } from "../../hooks/student/useStudent";
+import { useAddStudent, useEditStudent } from "../../hooks/student/useStudent";
 import * as Yup from "yup";
+import { useState } from "react";
 
 const StudentSchema = Yup.object().shape({
   fullName: Yup.string().required("Name is required"),
@@ -19,28 +20,35 @@ const StudentSchema = Yup.object().shape({
     .matches(/^9[0-9]{9}$/, "Invalid mobile number format, must start with 9."),
 });
 
-const useStudentForm = ({ selectedProfile }) => {
+const useStudentForm = ({ selectedProfile, onClose, data }) => {
+  const [loading, setLoading] = useState(false);
   const { mutate: addStudent } = useAddStudent({ selectedProfile });
-
+  const { mutate: editStudent } = useEditStudent({ selectedProfile });
   const formik = useFormik({
     initialValues: {
-      fullName: "",
-      gender: "",
-      dateOfBirth: "",
-      address: "",
-      email: "",
-      mobileNumber: "",
-      nationality: "",
-      maritalStatus: "",
-      appliedCountryCode: "",
+      fullName: data?.user?.fullName || "",
+      gender: data?.user?.gender || "",
+      dateOfBirth: data?.user?.dateOfBirth || "",
+      address: data?.user?.address || "",
+      email: data?.user?.email || "",
+      mobileNumber: data?.user?.mobileNumber || "",
+      nationality: data?.nationality || "",
+      maritalStatus: data?.maritalStatus || "",
+      appliedCountryCode: data?.appliedCountryCode?.countryCode || "",
       profilePicture: "",
-      idNumber:"",
-      idType:"",
+      idNumber: data?.idNumber || "",
+      idType: data?.idType || "",
+      id: data?.id || "",
     },
     validationSchema: StudentSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
-      handleRequest(values);
+      setLoading(true);
+      if (data) {
+        handleEditRequest(values);
+      } else {
+        handleRequest(values);
+      }
     },
   });
 
@@ -49,11 +57,21 @@ const useStudentForm = ({ selectedProfile }) => {
     addStudent(values, {
       onSuccess: () => {
         formik.resetForm();
+        onClose();
+      },
+    });
+  };
+  const handleEditRequest = (values) => {
+    values = { ...values };
+    editStudent(values, {
+      onSuccess: () => {
+        formik.resetForm();
+        onClose();
       },
     });
   };
 
-  return { formik };
+  return { formik, loading };
 };
 
 export default useStudentForm;

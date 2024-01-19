@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
-import { useAddStaff } from "../useStaff";
+import { useAddStaff, useEditStaff } from "../useStaff";
 import * as Yup from "yup";
+import { useState } from "react";
 
 const StaffSchema = Yup.object().shape({
   fullName: Yup.string().required("Name is required"),
@@ -15,36 +16,56 @@ const StaffSchema = Yup.object().shape({
   position: Yup.string().required("Position is Required"),
 });
 
-export const useStaffForm = ({ selectedProfile }) => {
+export const useStaffForm = ({ selectedProfile, onClose, data }) => {
+  const [loading, setLoading] = useState(false);
   const { mutate } = useAddStaff({ selectedProfile });
+  const { mutate: editMutate } = useEditStaff({ selectedProfile });
 
   const handleRequest = (value) => {
     value = { ...value };
     mutate(value, {
       onSuccess: () => {
         formik.resetForm();
+        onClose();
+      },
+    });
+  };
+
+  const handleEditRequest = (value) => {
+    value = { ...value };
+    editMutate(value, {
+      onSuccess: () => {
+        formik.resetForm();
+        onClose();
       },
     });
   };
   const formik = useFormik({
     initialValues: {
-      fullName: "",
-      gender: "",
-      dateOfBirth: "",
-      address: "",
-      email: "",
-      mobileNumber: "",
-      position: "",
+      fullName: data?.user?.fullName || "",
+      gender: data?.user?.gender || "",
+      dateOfBirth: data?.user?.dateOfBirth || "",
+      address: data?.user?.address || "",
+      email: data?.user?.email || "",
+      mobileNumber: data?.user?.mobileNumber || "",
+      position: data?.position || "",
+      id: data?.id || "",
     },
     validationSchema: StaffSchema,
     enableReinitialize: true,
     onSubmit: (value) => {
-      handleRequest(value);
+      setLoading(true);
+      if (data) {
+        handleEditRequest(value);
+      } else {
+        handleRequest(value);
+      }
     },
   });
 
   return {
     formik,
+    loading,
   };
 };
 export default useStaffForm;

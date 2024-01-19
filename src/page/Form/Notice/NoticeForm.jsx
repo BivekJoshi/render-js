@@ -11,7 +11,8 @@ const NoticeForm = ({ data }) => {
   const [selectedProfile, setSelectedProfile] = useState();
   const [imagePreview, setImagePreview] = useState(null);
   const { formik } = useNoticeForm({
-    selectedProfile,data
+    selectedProfile,
+    data,
   });
 
   const handleChangeImage = (e) => {
@@ -63,7 +64,7 @@ const NoticeForm = ({ data }) => {
                 width="180px"
               />
             ) : (
-              <div style={{ height:"200px"}}>
+              <div style={{ height: "200px" }}>
                 <img
                   src={BlankImage}
                   style={{ width: "100%", height: "100%" }}
@@ -105,7 +106,8 @@ const NoticeForm = ({ data }) => {
             sx={{ textTransform: "none" }}
             fullWidth
           >
-            Add Notice Photo
+            {data ? "Update Notice Image" : "Add Notice Image"}
+
             <VisuallyHiddenInput type="file" />
           </Button>
         </Box>
