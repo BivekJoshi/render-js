@@ -67,3 +67,17 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(err);
   }
 );
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (!error.response) {
+      alert("Server is down or unreachable. Please stay connected !!!.");
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;

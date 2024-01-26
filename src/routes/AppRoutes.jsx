@@ -5,6 +5,7 @@ import { useGetLoggedInUserDetail } from "../hooks/auth/useAuth";
 import ScrollToTop from "../utility/ScrollToTop";
 import Loadable from "../components/loader/Loadable";
 import ErrorPage from "../components/errorboundary/ErrorPage";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const LoginPage = Loadable(lazy(() => import("../page/auth/LoginPage")));
 const ApplyNow = Loadable(lazy(() => import("../page/applyNow/ApplyNow")));
@@ -61,23 +62,44 @@ const AppRoutes = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/aboutus" element={<AboutFinal />} />
             <Route path="/contactus" element={<ContactUs />} />
-            <Route
-              path="/studentProfile"
-              element={<StudentProfile data={data?.data} />}
-            />
             <Route path="/countries" element={<Countries />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/news&events" element={<NewsEvents />} />
-            <Route
-              path="/adminProfile"
-              element={<AdminProfile data={data?.data} />}
-            />
-            <Route
-              path="/superAdminProfile"
-              element={<SuperAdminProfile data={data?.data} />}
-            />
             <Route path="/team" element={<Team />} />
+            <Route
+              element={
+                <ProtectedRoutes redirectTo="/404" allowedRoles={["ADMIN"]} />
+              }
+            >
+              <Route
+                path="/adminProfile"
+                element={<AdminProfile data={data?.data} />}
+              />
+            </Route>
+            <Route
+              element={
+                <ProtectedRoutes
+                  redirectTo="/404"
+                  allowedRoles={["SUPER_ADMIN"]}
+                />
+              }
+            >
+              <Route
+                path="/superAdminProfile"
+                element={<SuperAdminProfile data={data?.data} />}
+              />
+            </Route>
+            <Route
+              element={
+                <ProtectedRoutes redirectTo="/404" allowedRoles={["STUDENT"]} />
+              }
+            >
+              <Route
+                path="/studentProfile"
+                element={<StudentProfile data={data?.data} />}
+              />
+            </Route>
           </Route>
         </Routes>
       </ScrollToTop>

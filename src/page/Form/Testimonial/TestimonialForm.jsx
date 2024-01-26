@@ -3,15 +3,28 @@ import React from "react";
 import useTestimonialForm from "../../../hooks/testimonial/Testimonial/useTestimonialForm";
 import { useGetUniversity } from "../../../hooks/university/useUniversity";
 import RemarkField from "../../../components/form/RemarkField";
+import { useGetTestimonial } from "../../../hooks/testimonial/useTestimonial";
+import { getUser } from "../../../utility/cookieHelper";
+import { jwtDecode } from "jwt-decode";
 
 const TestimonialForm = ({ onClose }) => {
-  const { formik } = useTestimonialForm({onClose});
   const { data: universityData, isLoading } = useGetUniversity();
+  const {
+    data: testimonialData,
+    isLoading: loadingTestimonial,
+  } = useGetTestimonial();
+  const user = getUser();
+  const decode = jwtDecode(user);
+  const userEmail = decode?.sub;
+  const matchingTestimonial = testimonialData?.find(
+    (data) => data?.student?.user.email === userEmail
+  );
 
   const handleFormSubmit = () => {
     formik.handleSubmit();
   };
 
+  const { formik } = useTestimonialForm({ onClose, matchingTestimonial });
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={12}>
@@ -79,7 +92,7 @@ const TestimonialForm = ({ onClose }) => {
           helperText={formik.touched.visaDate && formik.errors.visaDate}
           variant="outlined"
           size="small"
-          InputLabelProps={{shrink: true}}
+          InputLabelProps={{ shrink: true }}
         />
       </Grid>
       <Grid item xs={12} md={12}>
