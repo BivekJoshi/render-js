@@ -14,26 +14,18 @@ const Home = () => {
     <>
       <CarouselEffect />
       <br />
-      <br />
       <AboutUs />
-      <br />
       <br />
       <Courses/>
       <br/>
-      <br/>
       <Countries />
       <br />
-      <br />
       <StudyService/>
-      <br/>
       <br/>
       <Gallery/>
       <br/>
       <br/>
-      <br/>
-      <br/>
       <College/>
-      <br/>
       <br/>
       <NewsEvents />
     </>

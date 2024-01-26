@@ -14,22 +14,25 @@ const Applayout = ({ data }) => {
     <ThemeProvider theme={theme}>
       <div>
         <div style={{ position: "fixed", zIndex: 100, width: "100%", top: 0 }}>
-          <Navbar data={data}/>
+          <Navbar data={data} />
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <div
-          style={{ margin: "0px 2rem", position: "relative" }}
+          style={{
+            maxWidth: "100%",
+            height: "100%",
+            margin: "0px 2rem",
+            position: "relative",
+          }}
           className="main"
         >
           <Outlet />
         </div>
         <div>
-          <FooterInfo style={{ width: "100%" }} />
+          <FooterInfo style={{ width: "100%", position: "fixed" }} />
         </div>
         {data?.userType === "STUDENT" ? <SpeedDiall /> : ""}
       </div>

@@ -104,13 +104,19 @@ const NoticeForm = ({ data, onClose }) => {
           <Button
             component="label"
             variant="contained"
-            onChange={handleChangeImage}
+            // onChange={handleChangeImage}
             sx={{ textTransform: "none" }}
             fullWidth
           >
             {data ? "Update Notice Image" : "Add Notice Image"}
 
-            <VisuallyHiddenInput type="file" />
+            {/* <VisuallyHiddenInput type="file" /> */}
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleChangeImage}
+            />
           </Button>
         </Box>
       </Grid>

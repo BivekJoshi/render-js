@@ -1,27 +1,44 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Routes, Route, HashRouter } from "react-router-dom";
-import Home from "../page/home/Home";
-// import AboutUs from "../page/aboutUs/AboutUs";
-import ContactUs from "../page/ContactUs/ContactUs";
-import Countries from "../page/countries/Countries";
-import Courses from "../page/courses/Courses";
-import Gallery from "../page/gallery/Gallery";
-import NewsEvents from "../page/newsEvents/NewsEvents";
 import Applayout from "../components/layout/Applayout";
-import AboutFinal from "../page/aboutUs/AboutFinal";
-import LoginPage from "../page/auth/LoginPage";
-import ApplyNow from "../page/applyNow/ApplyNow";
-import Profile from "../page/profile/Profile";
-import AdminProfile from "../page/profile/AdminProfile/AdminProfile";
-import AuthRegistation from "../page/auth/AuthRegistation";
-import ForgetPassword from "../page/auth/ForgetPassword";
-import ResetPassword from "../page/auth/ResetPassword";
-import Team from "../page/team/Team";
-import StudentProfile from "../page/profile/StudentProfile.jsx/StudentProfile";
 import { useGetLoggedInUserDetail } from "../hooks/auth/useAuth";
-import ChangePassword from "../page/auth/ChangePassword";
-import SuperAdminProfile from "../page/profile/SuperAdminProfile/SuperAdminProfile";
 import ScrollToTop from "../utility/ScrollToTop";
+import Loadable from "../components/loader/Loadable";
+import ErrorPage from "../components/errorboundary/ErrorPage";
+
+const LoginPage = Loadable(lazy(() => import("../page/auth/LoginPage")));
+const ApplyNow = Loadable(lazy(() => import("../page/applyNow/ApplyNow")));
+const Team = Loadable(lazy(() => import("../page/team/Team")));
+const Home = Loadable(lazy(() => import("../page/home/Home")));
+const AboutFinal = Loadable(lazy(() => import("../page/aboutUs/AboutFinal")));
+const ContactUs = Loadable(lazy(() => import("../page/ContactUs/ContactUs")));
+const Countries = Loadable(lazy(() => import("../page/countries/Countries")));
+const Courses = Loadable(lazy(() => import("../page/courses/Courses")));
+const Gallery = Loadable(lazy(() => import("../page/gallery/Gallery")));
+const StudentProfile = Loadable(
+  lazy(() => import("../page/profile/StudentProfile.jsx/StudentProfile"))
+);
+const NewsEvents = Loadable(
+  lazy(() => import("../page/newsEvents/NewsEvents"))
+);
+const AdminProfile = Loadable(
+  lazy(() => import("../page/profile/AdminProfile/AdminProfile"))
+);
+const SuperAdminProfile = Loadable(
+  lazy(() => import("../page/profile/SuperAdminProfile/SuperAdminProfile"))
+);
+const AuthRegistation = Loadable(
+  lazy(() => import("../page/auth/AuthRegistation"))
+);
+const ForgetPassword = Loadable(
+  lazy(() => import("../page/auth/ForgetPassword"))
+);
+const ResetPassword = Loadable(
+  lazy(() => import("../page/auth/ResetPassword"))
+);
+const ChangePassword = Loadable(
+  lazy(() => import("../page/auth/ChangePassword"))
+);
 
 const AppRoutes = () => {
   const { data } = useGetLoggedInUserDetail();
@@ -29,6 +46,7 @@ const AppRoutes = () => {
     <HashRouter hashType="slash">
       <ScrollToTop>
         <Routes>
+          <Route exact path="*" element={<ErrorPage />} />
           <Route path="/" element={<Applayout data={data?.data} />}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginPage />} />

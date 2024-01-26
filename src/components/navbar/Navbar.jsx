@@ -84,9 +84,9 @@ function Navbar({ data }) {
   const handleClickProfile = () => {
     if (data?.userType === "ADMIN") {
       navigate(`/adminProfile`);
-    } else if(data?.userType === "STUDENT"){
+    } else if (data?.userType === "STUDENT") {
       navigate(`/studentProfile`);
-    }else{
+    } else {
       navigate(`/superAdminProfile`);
     }
 
@@ -104,9 +104,10 @@ function Navbar({ data }) {
         <Toolbar>
           <Box
             sx={{
-              width: "363px",
-              height: "60px",
+              width: "353px",
+              height: "70px",
               display: { xs: "none", md: "flex" },
+              marginRight: "26px",
             }}
           >
             <img
@@ -267,6 +268,7 @@ function Navbar({ data }) {
                     "linear-gradient(to right, rgb(255, 78, 2), rgb(242, 186, 162))",
                   padding: ".7rem 1.4rem",
                   borderRadius: ".7rem",
+                  height: isXsScreen ? "30px" : "",
                 }}
                 onClick={() => navigate("/login")}
               >

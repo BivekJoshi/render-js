@@ -5,7 +5,7 @@ import { useChangePassword } from "../../../hooks/auth/useAuth";
 const validationSchema = Yup.object({
   oldPassword: Yup.string().required("Please enter your old password"),
   email: Yup.string().required("Please enter your email"),
-  dateOfBirth: Yup.string().required("Please select yor date of birth"),
+  // dateOfBirth: Yup.string().required("Please select yor date of birth"),
   
   newPassword: Yup.string()
     .required("Password is required.")

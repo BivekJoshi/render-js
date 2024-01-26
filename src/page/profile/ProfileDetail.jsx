@@ -6,7 +6,7 @@ import { DOC_URL } from "../../api/axiosInterceptor";
 
 const ProfileDetail = () => {
   const { data: staffData, isLoading } = useGetStaff();
-  console.log(staffData, "staffData");
+  // console.log(staffData, "staffData");
   return (
     <Grid container spacing={2}>
       <Grid item xs={6}>

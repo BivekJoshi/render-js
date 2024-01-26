@@ -50,8 +50,6 @@ export const useCountryForm = ({ selectedProfile, data, onClose }) => {
       countryCode: data?.countryCode || "",
       countryDescription: data?.countryDescription || "",
       countryName: data?.countryName || "",
-      // imageFile: selectedProfile,
-      id: data?.id || "",
     },
     validationSchema: CountrySchema,
     enableReinitialize: true,
@@ -59,7 +57,7 @@ export const useCountryForm = ({ selectedProfile, data, onClose }) => {
       setLoading(true);
       if (data) {
         handledEditRequest(value);
-        handledEditImgRequest(value);
+        // handledEditImgRequest(value);
       } else {
         handleRequest(value);
       }

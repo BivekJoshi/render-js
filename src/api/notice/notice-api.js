@@ -1,7 +1,6 @@
 import { axiosInstance } from "../axiosInterceptor";
 
 export const addNotice = async (formData, selectedProfile) => {
-
   const imgData = new FormData();
   imgData.append("noticeImage", selectedProfile);
 
@@ -32,6 +31,8 @@ export const getNotice = async () => {
 };
 
 export const editNotice = async (formData, selectedProfile) => {
+  console.log(selectedProfile,"selected Profile");
+
   const imgData = new FormData();
   if (selectedProfile) {
     imgData.append("noticeImage", selectedProfile);

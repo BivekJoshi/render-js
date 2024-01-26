@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 
 const StudyMaterial = () => {
   const { data: materialData, isLoading } = useGetMaterial();
-  console.log(materialData?.data, "data ma nasx");
+  // console.log(materialData?.data, "data ma nasx");
 
 
   const LIST=[

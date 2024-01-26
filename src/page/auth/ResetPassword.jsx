@@ -216,7 +216,7 @@ const ResetPassword = () => {
               ),
             }}
           />
-          <TextField
+          {/* <TextField
             required
             value={formik.values.dateOfBirth}
             onChange={formik.handleChange}
@@ -232,7 +232,7 @@ const ResetPassword = () => {
             type="date"
             InputLabelProps={{ shrink: true }}
             inputProps={{ max: minAge }}
-          />
+          /> */}
           <LoadingButton
             // loading={loading}
             variant="contained"

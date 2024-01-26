@@ -24,6 +24,6 @@ export const forgotPassword = async (formData) => {
 /*________________________CHANGE PASSWORD_____________________________________*/
 export const changePassword = async (formData) => {
   const { confirmPassword, ...dataToSend } = formData;
-  const data = await axiosInstance.put(`/v1/user/change-password`,dataToSend);
+  const data = await axiosInstance.post(`/v1/user/change-password`,dataToSend);
   return data;
 };

@@ -40,7 +40,6 @@ const AboutUs = ({ siteData, isLoading }) => {
         </Typography>
       </Grid>
       <br />
-      <br />
       <Grid container spacing={2}>
         <Grid item xs={5} md={12} lg={2}>
           <div

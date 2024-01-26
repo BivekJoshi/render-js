@@ -5,6 +5,7 @@ import {
   IconButton,
   InputAdornment,
   TextField,
+  Tooltip,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -15,15 +16,20 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { Link } from "react-router-dom";
 import useChangePasswordForm from "../../form/auth/ChangePassword/useChangePasswordForm";
+import { getUser } from "../../utility/cookieHelper";
+import { jwtDecode } from "jwt-decode";
+import { useState } from "react";
 
 const ChangePassword = ({ data }) => {
   const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
-  const { formik } = useChangePasswordForm();
+  const token = getUser();
+  const decoded = jwtDecode(token);
+  const userEmail = decoded?.sub;
+  const { formik } = useChangePasswordForm({ userEmail });
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // React.useEffect(() => {
-  //   // Assuming `data.email` is the email you want to set
-  //   formik.setFieldValue("email", data?.email || "");
-  // }, [data?.email, formik]);
   return (
     <Grid
       container
@@ -64,59 +70,43 @@ const ChangePassword = ({ data }) => {
           >
             Change Password for {data?.fullName}
           </Typography>
-          {/* <TextField
-            required
-            variant="outlined"
-            label="Old Password"
-            name="oldPassword"
-            fullWidth
-            value={formik.values.oldPassword}
-            onChange={formik.handleChange}
-            onKeyPress={(ev) => {
-              if (ev.key === "Enter") {
-                formik.handleSubmit();
-                ev.preventDefault();
-              }
-            }}
-            error={
-              formik.touched.oldPassword && Boolean(formik.errors.oldPassword)
-            }
-            helperText={formik.touched.oldPassword && formik.errors.oldPassword}
-            type={showValues.showPassword ? "text" : "password"}
-            sx={{ minWidth: "10vw", mt: 1 }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showValues.showPassword ? (
-                      <VisibilityOff />
-                    ) : (
-                      <Visibility />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            size="small"
-          /> */}
           <TextField
             id="oldPassword"
             name="oldPassword"
             label="Old Password"
+            placeholder="Enter your old password"
+            fullWidth
+            required
             value={formik.values.oldPassword}
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+            }}
             error={
               formik.touched.oldPassword && Boolean(formik.errors.oldPassword)
             }
             helperText={formik.touched.oldPassword && formik.errors.oldPassword}
-            // InputLabelProps={{ shrink: Boolean(formik.values.countryCode) }}
             variant="outlined"
+            type={showOldPassword ? "text" : "password"}
             size="small"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Tooltip
+                    title={`Show ${
+                      showOldPassword ? "Hidden" : "Visible"
+                    } Old Password`}
+                  >
+                    <IconButton
+                      aria-label="toggle old password visibility"
+                      onClick={() => setShowOldPassword(!showOldPassword)}
+                      edge="end"
+                    >
+                      {showOldPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </Tooltip>
+                </InputAdornment>
+              ),
+            }}
           />
           <TextField
             id="newPassword"
@@ -128,9 +118,69 @@ const ChangePassword = ({ data }) => {
               formik.touched.newPassword && Boolean(formik.errors.newPassword)
             }
             helperText={formik.touched.newPassword && formik.errors.newPassword}
-            // InputLabelProps={{ shrink: Boolean(formik.values.countryCode) }}
             variant="outlined"
+            type={showNewPassword ? "text" : "password"}
             size="small"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Tooltip
+                    title={`Show ${
+                      showNewPassword ? "Hidden" : "Visible"
+                    } New Password`}
+                  >
+                    <IconButton
+                      aria-label="toggle old password visibility"
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                      edge="end"
+                    >
+                      {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </Tooltip>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            id="confirmPassword"
+            name="confirmPassword"
+            label="Confirm New Password"
+            placeholder="Confirm your new password"
+            fullWidth
+            required
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.confirmPassword &&
+              Boolean(formik.errors.confirmPassword)
+            }
+            helperText={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+            }
+            variant="outlined"
+            type={showConfirmPassword ? "text" : "password"}
+            size="small"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Tooltip
+                    title={`Show ${
+                      showConfirmPassword ? "Hidden" : "Visible"
+                    } Confirm Password`}
+                  >
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      edge="end"
+                    >
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </Tooltip>
+                </InputAdornment>
+              ),
+            }}
           />
           <LoadingButton
             // loading={loading}

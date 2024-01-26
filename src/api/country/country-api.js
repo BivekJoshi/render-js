@@ -64,14 +64,16 @@ export const editCountryImg = async (formData, selectedProfile) => {
 
 /*________________________Edit COUNTRY_____________________________________*/
 export const editCountry = async (formData, selectedProfile) => {
-  // const imgData = new FormData();
-  // imgData.append("imageFile", selectedProfile);
+  const imgData = new FormData();
+  if(selectedProfile){
+    imgData.append("imageFile", selectedProfile);
+  }
 
-  // Object.keys(formData).forEach((key) => {
-  //   if (key !== "imageFile") {
-  //     imgData.append(key, formData[key]);
-  //   }
-  // });
+  Object.keys(formData).forEach((key) => {
+    if (key !== "imageFile") {
+      imgData.append(key, formData[key]);
+    }
+  });
 
   try {
     const response = await axiosInstance.put(`v1/country/save`,formData, {
