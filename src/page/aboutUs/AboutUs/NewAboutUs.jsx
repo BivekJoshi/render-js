@@ -2,31 +2,20 @@ import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import AboutUs1 from "../../../assets/AboutUs1.png";
 import "../Style/aboutStyle.css";
-const list = [
-  {
-    id: 1,
-    list: "We pride ourselves on offering tailor-made solutions",
-  },
-  {
-    id: 2,
-    list:
-      " With a reputation built on trust and success, we are your reliable partner for educational guidance.",
-  },
-  {
-    id: 3,
-    list:
-      "   Renowned for excellence, we stand proudly as one of the premier education consultancies in Nepal",
-  },
-  {
-    id: 4,
-    list:
-      "As a leading consultancy in Nepal, we are dedicated to shaping your educational path with precision and care.",
-  },
-];
 
-const AboutUs = () => {
+const NewAboutUs = ({ data }) => {
   const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
+  function renderParagraphAsList(paragraph) {
+    const sentences = paragraph.split(".").map((sentence) => sentence.trim());
+    return (
+      <ul>
+        {sentences.map((sentence, index) => (
+          <li key={index}>{sentence}</li>
+        ))}
+      </ul>
+    );
+  }
   return (
     <Box sx={{ backgroundColor: "#fff", padding: "1rem" }}>
       <Grid
@@ -64,8 +53,7 @@ const AboutUs = () => {
               variant="h3"
               sx={{ fontFamily: "Lavishly Yours", color: "#199BEA" }}
             >
-              We are not only one of the best education consultancy in Nepal but
-              also a reliable partner for educational guidance.
+              {data?.quote}
             </Typography>
           </Grid>
         )}
@@ -75,19 +63,10 @@ const AboutUs = () => {
               variant="h1"
               sx={{ fontFamily: "Lavishly Yours", color: "#199BEA" }}
             >
-              We are not only one of the best education consultancy in Nepal but
-              also a reliable partner for educational guidance.
+              {data?.quote}
             </Typography>
           )}
-          <ul>
-            {list.map((item) => {
-              return (
-                <li key={item.id}>
-                  <Typography variant="h6">{item.list}</Typography>
-                </li>
-              );
-            })}
-          </ul>
+          {renderParagraphAsList(data?.aboutUsDescription1)}
         </Grid>
         <Grid item xs={12} md={12} lg={2}>
           <Grid
@@ -119,4 +98,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default NewAboutUs;

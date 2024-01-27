@@ -134,14 +134,14 @@ const CountryForm = ({ data, onClose }) => {
             label="Country Description"
             fullWidth
             formik={formik}
-            maxLength={255}
+            maxLength={555}
             variant="outlined"
             multiline
             // InputLabelProps={{
             //   shrink: Boolean(formik.values.countryDescription),
             // }}
             rows={4}
-            inputProps={{ maxLength: 250 }}
+            inputProps={{ maxLength: 550 }}
           />
         </div>
         <Grid

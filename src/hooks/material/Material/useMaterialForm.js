@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useAddMaterial } from "../useMaterial";
+import { useAddMaterial, useEditMaterial } from "../useMaterial";
 import * as Yup from "yup";
 import { useState } from "react";
 
@@ -9,9 +9,9 @@ const materialSchema = Yup.object().shape({
 });
 
 export const useMaterialForm = ({ selectedProfile, data, onClose }) => {
-  console.log(data, "data ma chaii");
   const [loading, setLoading] = useState(false);
   const { mutate } = useAddMaterial({ selectedProfile });
+  const { mutate: editmutate } = useEditMaterial({ selectedProfile });
 
   const handleRequest = (value) => {
     value = { ...value };
@@ -22,9 +22,18 @@ export const useMaterialForm = ({ selectedProfile, data, onClose }) => {
       },
     });
   };
+  const handleEditRequest = (value) => {
+    value = { ...value };
+    editmutate(value, {
+      onSuccess: () => {
+        formik.resetForm();
+        onClose();
+      },
+    });
+  };
   const formik = useFormik({
     initialValues: {
-      name: data?.name||"",
+      name: data?.name || "",
       ofCountryCodes: "",
       id: data?.id || "",
     },
@@ -32,7 +41,11 @@ export const useMaterialForm = ({ selectedProfile, data, onClose }) => {
     enableReinitialize: true,
     onSubmit: (value) => {
       setLoading(true);
-      handleRequest(value);
+      if (data) {
+        handleEditRequest(value);
+      } else {
+        handleRequest(value);
+      }
     },
   });
 

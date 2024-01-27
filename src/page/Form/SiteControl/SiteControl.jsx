@@ -156,7 +156,7 @@ const SiteControl = () => {
               gap: "1.5rem",
             }}
           >
-            <TextField
+            {/* <TextField
               id="aboutUsTitle1"
               name="aboutUsTitle1"
               label="AboutUs Title1"
@@ -172,14 +172,14 @@ const SiteControl = () => {
               }
               variant="outlined"
               size="small"
-            />
+            /> */}
             <TextField
               id="aboutUsDescription1"
               name="aboutUsDescription1"
               label="AboutUs Description1"
               fullWidth
               multiline
-              rows={4}
+              rows={7}
               value={formik.values.aboutUsDescription1}
               onChange={formik.handleChange}
               error={

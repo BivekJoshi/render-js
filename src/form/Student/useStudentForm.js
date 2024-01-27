@@ -33,7 +33,7 @@ const useStudentForm = ({ selectedProfile, onClose, data }) => {
       email: data?.user?.email || "",
       mobileNumber: data?.user?.mobileNumber || "",
       nationality: data?.nationality || "",
-      maritalStatus: data?.maritalStatus || "",
+      maritalStatus: "",
       appliedCountryCode: data?.appliedCountryCode?.countryCode || "",
       profilePicture: "",
       idNumber: data?.idNumber || "",

@@ -6,7 +6,6 @@ import { DOC_URL } from "../../api/axiosInterceptor";
 
 const NewNewsEvents = () => {
   const { data, isLoading } = useGetNoticeLatest();
-  console.log(data);
   return (
     <Box
       sx={{

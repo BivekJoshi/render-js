@@ -40,7 +40,7 @@ function Navbar({ data }) {
         {
           id: 2,
           item: "About Us",
-          path: "/aboutus",
+          path: "/ric/aboutus",
         },
         {
           id: 3,
@@ -50,7 +50,7 @@ function Navbar({ data }) {
         {
           id: 4,
           item: "Countries",
-          path: "/countries",
+          path: "/ric/countries",
         },
         {
           id: 5,

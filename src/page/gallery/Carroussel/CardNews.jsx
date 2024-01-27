@@ -23,7 +23,6 @@ const CardNews = ({
   const theme = useTheme();
   const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
-  console.log(studentName, "data masdvsdcsdcsdc");
 
   return (
     <Card>

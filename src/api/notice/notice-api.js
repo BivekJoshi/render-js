@@ -36,7 +36,6 @@ export const getNoticeLatest = async () => {
 };
 
 export const editNotice = async (formData, selectedProfile) => {
-  console.log(selectedProfile,"selected Profile");
 
   const imgData = new FormData();
   if (selectedProfile) {

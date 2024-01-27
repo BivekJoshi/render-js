@@ -1,62 +1,37 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
-import USA from "../../assets/USA.png";
-import Austrilia from "../../assets/Austrilia.png";
 import "./countrystyle.css";
+import { useGetCountry } from "../../hooks/country/useCountry";
 import FormModal from "../../components/modal/FormModal";
 import RegistationForm from "../Form/Ragistation/RegistationForm";
+import { DOC_URL } from "../../api/axiosInterceptor";
 
-const CountryInfoList = [
-  {
-    id: 1,
-    countryName: "USA",
-    countryImg: USA,
-    list: [
-      {
-        text:
-          "Unlimited scripts on watchlistThe USA is renowned for its globally acclaimed universities, offering diverse and cutting-edge programs that foster innovation and critical thinking.",
-      },
-      {
-        text:
-          "Additionally, international students benefit from a multicultural environment, gaining exposure to different perspectives and enhancing their overall educational experience.",
-      },
-      {
-        text:
-          "We are dedicated to providing comprehensive support to students aspiring to pursue their education in the USA .",
-      },
-      {
-        text:
-          "Ensuring not only academic success but also guiding them toward a fulfilling and prosperous career through personalized assistance and resources.",
-      },
-    ],
-  },
-  {
-    id: 2,
-    countryName: "Australia",
-    countryImg: Austrilia,
-    list: [
-      {
-        text:
-          "Australia is recognized for its high-quality education system, featuring world-class universities and vocational institutions.",
-      },
-      {
-        text:
-          "We are dedicated to providing comprehensive support to students aspiring to pursue education in Australia",
-      },
-      {
-        text:
-          "Studying in Australia offers students a globally relevant education and a unique cultural experience, making it an excellent choice for international students",
-      },
-      {
-        text:
-          "Australia is home to several top-ranked universities known for their academic excellence and rigorous standards.",
-      },
-    ],
-  },
-];
-
-const Countries = () => {
+const NewCountry = () => {
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
+
+  const { data: countryData, isLoading } = useGetCountry();
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   const handleButtonClick = () => {
     setOpenRegisterModal(true);
@@ -76,7 +51,7 @@ const Countries = () => {
       </Grid>
       <br />
       <br />
-      {CountryInfoList?.map((data, index) => {
+      {countryData?.map((data, index) => {
         return (
           <div key={index}>
             <Grid
@@ -87,27 +62,20 @@ const Countries = () => {
             >
               <Grid item xs={12} md={2} lg={2}>
                 <img
-                  src={data?.countryImg}
+                  src={`${DOC_URL}${data?.imagePath}`}
                   alt="AboutUs"
                   style={{ width: "100%", height: "90%" }}
                   className="countryImg"
                 />
               </Grid>
               <Grid item xs={12} md={7} lg={7}>
-                {/* <div
-                  style={{
-                    color: "#199BEA",
-                    fontSize: 40,
-                    fontFamily: "Lavishly Yours",
-                    fontWeight: "400",
-                    wordWrap: "break-word",
-                  }}
-                > */}
                 <Typography variant="h1">
                   Study in {data?.countryName}
                 </Typography>
-                {/* </div> */}
-                <ul>
+                <Typography varianat="h6">
+                  {data?.countryDescription}
+                </Typography>
+                {/* <ul>
                   {data?.list?.map((item, index) => {
                     return (
                       <li key={index}>
@@ -115,8 +83,7 @@ const Countries = () => {
                       </li>
                     );
                   })}
-                  {/* {data?.countryDescription} */}
-                </ul>
+                </ul> */}
               </Grid>
               <Grid item xs={12} md={3} lg={3}>
                 <Grid
@@ -148,6 +115,9 @@ const Countries = () => {
                   <br />
                 </Grid>
               </Grid>
+              <Grid item xs={12}>
+                <Divider />
+              </Grid>
             </Grid>
           </div>
         );
@@ -166,4 +136,4 @@ const Countries = () => {
   );
 };
 
-export default Countries;
+export default NewCountry;

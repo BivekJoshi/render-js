@@ -8,8 +8,7 @@ const siteDetailSchema = Yup.object().shape({
 });
 
 export const useSiteDetailForm = ({ selectedProfile }) => {
-  const {data,isLoading}=useGetSiteDetail();
-  console.log(data,"data");
+  const { data, isLoading } = useGetSiteDetail();
   const { mutate } = useAddSiteDetail({ selectedProfile });
 
   const handleRequest = (value) => {
@@ -22,23 +21,23 @@ export const useSiteDetailForm = ({ selectedProfile }) => {
   };
   const formik = useFormik({
     initialValues: {
-      title: data?.title||"",
-      companyName: data?.companyName||"",
-      address: data?.address||"",
-      contact1: data?.contact1||"",
-      contact2: data?.contact2||"",
-      quote: data?.quote||"",
-      aboutUsTitle1: data?.aboutUsTitle1||"",
-      aboutUsDescription1: data?.aboutUsDescription1||"",
-      aboutUsTitle2: data?.aboutUsTitle2||"",
-      aboutUsDescription2: data?.aboutUsDescription2||"",
-      aboutUsTitle3: data?.aboutUsTitle1||"",
-      aboutUsDescription3: data?.aboutUsDescription3||"",
-      facebookUrl: data?.facebookUrl||"",
-      pinterestUrl: data?.pinterestUrl||"",
-      youtubeUrl: data?.youtubeUrl||"",
-      instagramUrl: data?.instagramUrl||"",
-      id:data?.id||""
+      title: data?.title || "",
+      companyName: data?.companyName || "",
+      address: data?.address || "",
+      contact1: data?.contact1 || "",
+      contact2: data?.contact2 || "",
+      quote: data?.quote || "",
+      aboutUsTitle1: data?.aboutUsTitle1 || "",
+      aboutUsDescription1: data?.aboutUsDescription1 || "",
+      aboutUsTitle2: data?.aboutUsTitle2 || "",
+      aboutUsDescription2: data?.aboutUsDescription2 || "",
+      aboutUsTitle3: data?.aboutUsTitle1 || "",
+      aboutUsDescription3: data?.aboutUsDescription3 || "",
+      facebookUrl: data?.facebookUrl || "",
+      pinterestUrl: data?.pinterestUrl || "",
+      youtubeUrl: data?.youtubeUrl || "",
+      instagramUrl: data?.instagramUrl || "",
+      id: data?.id || "",
     },
     validationSchema: siteDetailSchema,
     enableReinitialize: true,

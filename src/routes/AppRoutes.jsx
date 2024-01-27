@@ -10,6 +10,8 @@ import ChooseWhatTo from "../components/layout/ChooseWhatTo";
 import TeamWeb from "../page/team/TeamWeb";
 import NewGallery from "../page/gallery/NewGallery";
 import NewNewsEvents from "../page/newsEvents/NewNewsEvent";
+import NewCountry from "../page/countries/NewCountry";
+import NewAboutFinal from "../page/aboutUs/NewAboutFinal";
 
 const LoginPage = Loadable(lazy(() => import("../page/auth/LoginPage")));
 const ApplyNow = Loadable(lazy(() => import("../page/applyNow/ApplyNow")));
@@ -53,8 +55,7 @@ const AppRoutes = () => {
         <Routes>
           <Route exact path="*" element={<ErrorPage />} />
           {/* <Route path="/" element={<ChooseWhatTo />}> */}
-            <Route path="/" element={<Applayout data={data?.data} />}>
-
+          <Route path="/" element={<Applayout data={data?.data} />}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/authRegister" element={<AuthRegistation />} />
@@ -74,6 +75,8 @@ const AppRoutes = () => {
             <Route path="/ric/team" element={<TeamWeb />} />
             <Route path="/ric/gallery" element={<NewGallery />} />
             <Route path="/ric/news&events" element={<NewNewsEvents />} />
+            <Route path="/ric/countries" element={<NewCountry />} />
+            <Route path="/ric/aboutus" element={<NewAboutFinal />} />
             {/* -------------------------------------IF SERVER WORKS---------------------------------------------------- */}
             <Route
               element={

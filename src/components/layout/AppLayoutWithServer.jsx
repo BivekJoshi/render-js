@@ -1,13 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
-import FooterInfo from "../footer/FooterInfo";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { useMemo } from "react";
 import { themeSettings } from "../../theme";
 import "./font-family.css";
 import SpeedDiall from "../SpeedDial/SpeedDial";
 import { useGetLoggedInUserDetail } from "../../hooks/auth/useAuth";
+import NewFooterInfo from "../footer/NewFooterInfo";
 
 const AppLayoutWithServer = () => {
   const { data } = useGetLoggedInUserDetail();
@@ -34,7 +34,7 @@ const AppLayoutWithServer = () => {
           <Outlet />
         </div>
         <div>
-          <FooterInfo style={{ width: "100%", position: "fixed" }} />
+          <NewFooterInfo style={{ width: "100%", position: "fixed" }} />
         </div>
         {data?.userType === "STUDENT" ? <SpeedDiall /> : ""}
       </div>
