@@ -19,8 +19,10 @@ import useChangePasswordForm from "../../form/auth/ChangePassword/useChangePassw
 import { getUser } from "../../utility/cookieHelper";
 import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
+import { useGetLoggedInUserDetail } from "../../hooks/auth/useAuth";
 
-const ChangePassword = ({ data }) => {
+const ChangePassword = () => {
+  const { data } = useGetLoggedInUserDetail();
   const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const token = getUser();
   const decoded = jwtDecode(token);

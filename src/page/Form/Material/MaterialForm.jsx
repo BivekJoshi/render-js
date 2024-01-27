@@ -6,6 +6,7 @@ import {
   Checkbox,
   Grid,
   TextField,
+  Typography,
   styled,
 } from "@mui/material";
 import toast from "react-hot-toast";
@@ -145,6 +146,12 @@ const MaterialForm = ({ data, onClose }) => {
             />
           </Box>
           <Box>
+            <div style={{display:"flex"}}>
+            <Typography>Selected:</Typography>
+            <Typography variant="h5" sx={{ color: "red" }}>
+              {selectedProfile?.name}
+            </Typography>
+            </div>
             <Button
               component="label"
               variant="contained"

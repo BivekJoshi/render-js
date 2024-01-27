@@ -6,6 +6,10 @@ import ScrollToTop from "../utility/ScrollToTop";
 import Loadable from "../components/loader/Loadable";
 import ErrorPage from "../components/errorboundary/ErrorPage";
 import ProtectedRoutes from "./ProtectedRoutes";
+import ChooseWhatTo from "../components/layout/ChooseWhatTo";
+import TeamWeb from "../page/team/TeamWeb";
+import NewGallery from "../page/gallery/NewGallery";
+import NewNewsEvents from "../page/newsEvents/NewNewsEvent";
 
 const LoginPage = Loadable(lazy(() => import("../page/auth/LoginPage")));
 const ApplyNow = Loadable(lazy(() => import("../page/applyNow/ApplyNow")));
@@ -48,15 +52,14 @@ const AppRoutes = () => {
       <ScrollToTop>
         <Routes>
           <Route exact path="*" element={<ErrorPage />} />
-          <Route path="/" element={<Applayout data={data?.data} />}>
+          {/* <Route path="/" element={<ChooseWhatTo />}> */}
+            <Route path="/" element={<Applayout data={data?.data} />}>
+
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/authRegister" element={<AuthRegistation />} />
             <Route path="/forget-password" element={<ForgetPassword />} />
-            <Route
-              path="/change-password"
-              element={<ChangePassword data={data?.data} />}
-            />
+            <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/ric/reset-password" element={<ResetPassword />} />
             <Route path="/applyNow" element={<ApplyNow />} />
             <Route path="/home" element={<Home />} />
@@ -67,6 +70,11 @@ const AppRoutes = () => {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/news&events" element={<NewsEvents />} />
             <Route path="/team" element={<Team />} />
+            {/* -------------------------------------IF SERVER WORKS---------------------------------------------------- */}
+            <Route path="/ric/team" element={<TeamWeb />} />
+            <Route path="/ric/gallery" element={<NewGallery />} />
+            <Route path="/ric/news&events" element={<NewNewsEvents />} />
+            {/* -------------------------------------IF SERVER WORKS---------------------------------------------------- */}
             <Route
               element={
                 <ProtectedRoutes redirectTo="/404" allowedRoles={["ADMIN"]} />

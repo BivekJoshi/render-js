@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
-import { addNotice, editNotice, getNotice } from "../../api/notice/notice-api";
+import { addNotice, editNotice, getNotice, getNoticeLatest } from "../../api/notice/notice-api";
 
 export const useAddImage = ({ onSuccess, selectedProfile }) => {
   const queryClient = useQueryClient();
@@ -44,6 +44,13 @@ export const useEditImage = ({ onSuccess, selectedProfile }) => {
 
 export const useGetNotice = () => {
   return useQuery(['getNotice'], () => getNotice(), {
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetNoticeLatest = () => {
+  return useQuery(['getNoticeLatest'], () => getNoticeLatest(), {
     refetchInterval: false,
     refetchOnWindowFocus: false,
   });

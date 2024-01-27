@@ -20,7 +20,7 @@ const SiteControl = () => {
     selectedProfile,
   });
   const handleSubmit = () => {
-      formik.submitForm();
+    formik.submitForm();
   };
   const [addAbout, setAddAbout] = useState(false);
   const [addAboutMultiple, setAddAboutMultiple] = useState(false);
@@ -207,7 +207,11 @@ const SiteControl = () => {
             xs={12}
             sx={{ display: "flex", justifyContent: "flex-end" }}
           >
-            <Button variant="contained" onClick={handleClickFirst}>
+            <Button
+              variant="contained"
+              onClick={handleClickFirst}
+              sx={{ textTransform: "none" }}
+            >
               Add more
             </Button>
           </Grid>
@@ -296,7 +300,7 @@ const SiteControl = () => {
                 xs={12}
                 sx={{ display: "flex", justifyContent: "flex-end" }}
               >
-                <Button variant="contained" onClick={handleClickSecond}>
+                <Button variant="contained" onClick={handleClickSecond} sx={{textTransform:"none"}}>
                   Add more
                 </Button>
               </Grid>
@@ -307,62 +311,62 @@ const SiteControl = () => {
         {addAboutMultiple && (
           <>
             <Grid item xs={12} sx={{ display: "flex", flexDirection: "row" }}>
-            <Box sx={{ width: "20%" }}>
-            <div style={{ width: "180px", height: "180px" }}>
-              <img
-                src={Img1}
-                alt="AboutUs!"
-                style={{ width: "100%", height: "100%" }}
-              />
-            </div>
-          </Box>
-          <Box
-            sx={{
-              width: "80%",
-              display: "flex",
-              flexDirection: "column",
-              gap: "1.5rem",
-            }}
-          >
-              <TextField
-                id="aboutUsTitle3"
-                name="aboutUsTitle3"
-                label="AboutUs Title3"
-                fullWidth
-                value={formik.values.aboutUsTitle3}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.aboutUsTitle3 &&
-                  Boolean(formik.errors.aboutUsTitle3)
-                }
-                helperText={
-                  formik.touched.aboutUsTitle3 && formik.errors.aboutUsTitle3
-                }
-                variant="outlined"
-                size="small"
-                // InputLabelProps={{ shrink: Boolen(formik.values.title) }}
-              />
-              <TextField
-                id="aboutUsDescription3"
-                name="aboutUsDescription3"
-                label="AboutUs Description3"
-                fullWidth
-                multiline
-                rows={4}
-                value={formik.values.aboutUsDescription3}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.aboutUsDescription3 &&
-                  Boolean(formik.errors.aboutUsDescription3)
-                }
-                helperText={
-                  formik.touched.aboutUsDescription3 &&
-                  formik.errors.aboutUsDescription3
-                }
-                variant="outlined"
-                size="small"
-                // InputLabelProps={{ shrink: Boolen(formik.values.title) }}
-              />
+              <Box sx={{ width: "20%" }}>
+                <div style={{ width: "180px", height: "180px" }}>
+                  <img
+                    src={Img1}
+                    alt="AboutUs!"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                </div>
+              </Box>
+              <Box
+                sx={{
+                  width: "80%",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1.5rem",
+                }}
+              >
+                <TextField
+                  id="aboutUsTitle3"
+                  name="aboutUsTitle3"
+                  label="AboutUs Title3"
+                  fullWidth
+                  value={formik.values.aboutUsTitle3}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.aboutUsTitle3 &&
+                    Boolean(formik.errors.aboutUsTitle3)
+                  }
+                  helperText={
+                    formik.touched.aboutUsTitle3 && formik.errors.aboutUsTitle3
+                  }
+                  variant="outlined"
+                  size="small"
+                  // InputLabelProps={{ shrink: Boolen(formik.values.title) }}
+                />
+                <TextField
+                  id="aboutUsDescription3"
+                  name="aboutUsDescription3"
+                  label="AboutUs Description3"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  value={formik.values.aboutUsDescription3}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.aboutUsDescription3 &&
+                    Boolean(formik.errors.aboutUsDescription3)
+                  }
+                  helperText={
+                    formik.touched.aboutUsDescription3 &&
+                    formik.errors.aboutUsDescription3
+                  }
+                  variant="outlined"
+                  size="small"
+                  // InputLabelProps={{ shrink: Boolen(formik.values.title) }}
+                />
               </Box>
             </Grid>
           </>
@@ -385,7 +389,7 @@ const SiteControl = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <FacebookIcon sx={{color:'blue'}}/>
+                  <FacebookIcon sx={{ color: "blue" }} />
                 </InputAdornment>
               ),
             }}
@@ -411,7 +415,7 @@ const SiteControl = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <PinterestIcon sx={{color:'red'}}/>
+                  <PinterestIcon sx={{ color: "red" }} />
                 </InputAdornment>
               ),
             }}
@@ -435,7 +439,7 @@ const SiteControl = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <YouTubeIcon sx={{color:'red'}}/>
+                  <YouTubeIcon sx={{ color: "red" }} />
                 </InputAdornment>
               ),
             }}
@@ -461,15 +465,17 @@ const SiteControl = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <InstagramIcon sx={{color:"red"}}/>
+                  <InstagramIcon sx={{ color: "red" }} />
                 </InputAdornment>
               ),
             }}
             // InputLabelProps={{ shrink: Boolen(formik.values.title) }}
           />
         </Grid>
-        <Grid item xs={12} sx={{display:"flex",justifyContent:"flex-end"}}>
-          <Button variant="contained" onClick={handleSubmit}>Make Changes</Button>
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button variant="contained" onClick={handleSubmit} sx={{textTransform:"none"}}>
+            Make Changes
+          </Button>
         </Grid>
       </Grid>
     </>

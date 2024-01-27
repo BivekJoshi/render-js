@@ -17,7 +17,7 @@ export const getLoggedinUserDetail = async () => {
 
 /*________________________FORGET PASSWORD_____________________________________*/
 export const forgotPassword = async (formData) => {
-  const data = await axiosInstance.put(`/v1/user/forgot-password`,formData);
+  const data = await axiosInstance.post(`/v1/user/forgot-password`,formData);
   return data;
 };
 

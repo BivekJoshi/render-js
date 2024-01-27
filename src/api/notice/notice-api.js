@@ -30,6 +30,11 @@ export const getNotice = async () => {
   return data?.data;
 };
 
+export const getNoticeLatest = async () => {
+  const data = await axiosInstance.get(`v1/notice/find/latest`);
+  return data?.data;
+};
+
 export const editNotice = async (formData, selectedProfile) => {
   console.log(selectedProfile,"selected Profile");
 

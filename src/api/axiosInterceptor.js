@@ -8,7 +8,7 @@ export const DOC_URL = getDocUrl();
 
 export const axiosInstance = Axios.create({
   baseURL: BASEURL,
-  timeout: 50000,
+  timeout: 20000,
 });
 
 axiosInstance.defaults.headers["Access-Control-Allow-Origin"] = "*";
@@ -68,16 +68,16 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    if (!error.response) {
-      alert("Server is down or unreachable. Please stay connected !!!.");
-    }
-    return Promise.reject(error);
-  }
-);
+// axiosInstance.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     if (!error.response) {
+//       alert("Server is down or unreachable. Please stay connected !!!.");
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
-export default axiosInstance;
+// export default axiosInstance;

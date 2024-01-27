@@ -10,10 +10,20 @@ import {
 } from "@mui/material";
 import Image from "../../../assets/AboutUs1.png";
 import "./cardStyle.css";
+import { DOC_URL } from "../../../api/axiosInterceptor";
 
-const CardNews = ({ studentName, quotes }) => {
+const CardNews = ({
+  studentName,
+  quotes,
+  scholarship,
+  studentImage,
+  university,
+  visaDate,
+}) => {
   const theme = useTheme();
   const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
+
+  console.log(studentName, "data masdvsdcsdcsdc");
 
   return (
     <Card>
@@ -85,11 +95,19 @@ const CardNews = ({ studentName, quotes }) => {
           }}
           className="img"
         >
-          <img
-            src={Image}
-            style={{ width: "100%", height: "100%", borderRadius: "50%" }}
-            alt="About Us"
-          />
+          {studentImage ? (
+            <img
+              src={`${DOC_URL}${studentImage}`}
+              style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+              alt="About Us"
+            />
+          ) : (
+            <img
+              src={Image}
+              style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+              alt="About Us"
+            />
+          )}
         </div>
       </Box>
 
@@ -105,15 +123,19 @@ const CardNews = ({ studentName, quotes }) => {
         )}
         {!isXsScreen ? (
           <Typography variant="h6">
-            MIT University
+            {university}
             <br />
-            700$ Scholarship
+            {scholarship} Scholarship
+            <br />
+            {visaDate}
           </Typography>
         ) : (
           <Typography variant="h7">
-            MIT University
+            {university}
             <br />
-            700$ Scholarship
+            {scholarship} Scholarship
+            <br />
+            {visaDate}
           </Typography>
         )}
       </CardContent>

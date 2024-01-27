@@ -10,45 +10,7 @@ import { Avatar, Box, Container, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/RenderLogoFull.png";
 import { removeUser } from "../../utility/cookieHelper";
-import { DOC_URL } from "../../api/axiosInterceptor";
-
-const navItem = [
-  {
-    id: 1,
-    item: "Home",
-    path: "/home",
-  },
-  {
-    id: 2,
-    item: "About Us",
-    path: "/aboutus",
-  },
-  {
-    id: 3,
-    item: "Courses",
-    path: "/courses",
-  },
-  {
-    id: 4,
-    item: "Countries",
-    path: "/countries",
-  },
-  {
-    id: 5,
-    item: "Gallery",
-    path: "/gallery",
-  },
-  {
-    id: 6,
-    item: "News & Events",
-    path: "/news&events",
-  },
-  {
-    id: 7,
-    item: "Our Team",
-    path: "/team",
-  },
-];
+import { DOC_URL, axiosInstance } from "../../api/axiosInterceptor";
 
 function Navbar({ data }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -56,6 +18,93 @@ function Navbar({ data }) {
   const open = Boolean(anchorEl);
   const [activePage, setActivePage] = React.useState("/home");
   const isXsScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const [backendResponsive, setBackendResponsive] = React.useState(true);
+  React.useEffect(() => {
+    axiosInstance
+      .get("v1/site-detail/find")
+      .then((response) => {
+        setBackendResponsive(true);
+      })
+      .catch((error) => {
+        setBackendResponsive(false);
+      });
+  }, []);
+
+  const navItem = backendResponsive
+    ? [
+        {
+          id: 1,
+          item: "Home",
+          path: "/home",
+        },
+        {
+          id: 2,
+          item: "About Us",
+          path: "/aboutus",
+        },
+        {
+          id: 3,
+          item: "Courses",
+          path: "/courses",
+        },
+        {
+          id: 4,
+          item: "Countries",
+          path: "/countries",
+        },
+        {
+          id: 5,
+          item: "Gallery",
+          path: "/ric/gallery",
+        },
+        {
+          id: 6,
+          item: "News & Events",
+          path: "/ric/news&events",
+        },
+        {
+          id: 7,
+          item: "Our Team",
+          path: "/team",
+        },
+      ]
+    : [
+        {
+          id: 1,
+          item: "Home",
+          path: "/home",
+        },
+        {
+          id: 2,
+          item: "About Us",
+          path: "/aboutus",
+        },
+        {
+          id: 3,
+          item: "Courses",
+          path: "/courses",
+        },
+        {
+          id: 4,
+          item: "Countries",
+          path: "/countries",
+        },
+        {
+          id: 5,
+          item: "Gallery",
+          path: "/gallery",
+        },
+        {
+          id: 6,
+          item: "News & Events",
+          path: "/news&events",
+        },
+        {
+          id: 7,
+          item: "Our Team",
+          path: "/ric/team",
+        },
+      ];
 
   const navigate = useNavigate();
 
